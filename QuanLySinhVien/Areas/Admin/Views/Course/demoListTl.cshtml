@@ -1,0 +1,29 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.UpLoadFileTLL>
+@{
+    ViewData["Title"] = "demoListTl";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">data</th>
+     
+    </tr>
+  </thead>
+ @foreach (var item in Model)
+    {
+         <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>@item.Title</td>
+      <td><a href="~/uploads/@item.Title">tai lieu</a></td>
+      
+    </tr>
+  
+  </tbody>
+    }
+</table>
+

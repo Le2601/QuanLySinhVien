@@ -1,0 +1,103 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.CourseMember>
+@{
+    ViewData["Title"] = "Attendance";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+
+<h1>Điểm danh thành viên khóa học</h1>
+
+<div class="table-responsive">
+   
+  <table class="table">
+    <thead>
+      <tr>
+        <th>MSSV</th>
+        <th>Tên sinh viên</th>
+        <th>Điểm danh</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        @if(Model != null){
+            foreach (var item in Model) {
+                      <tr>
+                        <td>@item.Mssv</td>
+                        <td>@item.Name</td>
+                        
+                         <td>
+                            @* <form method="post" asp-controller="CourseMemberLecturers" asp-action="Attendance">
+                                 <input type="hidden" name="CourseId" value="@item.CourseId">
+                                 <input type="hidden" name="Name" value="@item.Name">
+                                 <input type="hidden" name="Mssv" value="@item.Mssv" >
+                                 <input type="hidden" name="Email" value="@item.Email" >
+                                 <input type="hidden" name="Phone" value="@item.Phone" >
+
+                                 <input type="checkbox" name="Attendance" value="1">
+                             </form>*@
+                               @* <a id="demo" class="BtnUpdate" name="Attendance" data-id="@item.Id" value="1" href="#">Vắng</a>*@
+                               <input type="checkbox"  class="BtnUpdate Getvalue" name="Attendance" data-id="@item.Id" value="1">
+                         </td>
+
+                        
+                       
+                      </tr>
+                      
+            }
+           
+        }
+        else
+        {
+            <tr>
+                <td>Rỗng</td>
+            </tr>
+        }
+       <a class="btn btn-success" href="/CourseLecturers/index">Trở về</a>
+
+
+      <!-- More rows -->
+    </tbody>
+  </table>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function(){
+            $('body').on('click','.BtnUpdate',function(){
+
+                var Vvalue = document.querySelector(".Getvalue").value;
+
+                var id = $(this).data('id');
+
+              
+               
+
+               
+
+                   
+                        
+                            $.ajax({
+
+                                url: '/CourseMemberLecturers/Attendance',
+                                type: 'post',
+                                data: {id:id,Vvalue:Vvalue},
+                                success: function(rs){
+                                    if(rs.success){
+                                        alert(rs.msg);
+                                        //location.reload();
+                                    }
+                                }
+
+                            });
+                    
+
+
+                
+            });
+        });
+    </script>
+  
+
+}
+

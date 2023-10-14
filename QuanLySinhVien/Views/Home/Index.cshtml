@@ -1,0 +1,64 @@
+﻿@using QuanLySinhVien.Models
+@model IEnumerable<QuanLySinhVien.Models.department>
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    List<Course> IsCourse = ViewBag.ShowCourse;
+
+
+
+}
+
+@*<div class="text-center">
+
+
+   
+
+
+
+
+    
+  
+    
+</div>*@
+
+<div class="container">
+    <h2>Danh sách khóa học</h2>
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <a  style="font-size:30px" data-toggle="collapse" data-target="#danh-sach_@item.Id">@item.Title (@item.Course.Count())</a>
+
+            <br />
+
+            <div id="danh-sach_@item.Id" class="collapse">
+               @*  <ul class="list-group"> *@
+
+                    @foreach (var item_course in IsCourse)
+                    {
+
+                       @*  <li class="list-group-item"> *@
+                            @if (item_course.DepartmentId == item.Id)
+                            {
+                        <a style="text-decoration:none" href="/details/@item_course.Alias-@item_course.Id" class="CourseFiles" data-id="item_course.DepartmentId">@item_course.Title</a> <br />
+
+                            }
+                        @* </li> *@
+                    }
+
+
+                  
+
+              @*   </ul> *@
+            </div>
+
+           
+
+        }
+    }
+
+</div>
+

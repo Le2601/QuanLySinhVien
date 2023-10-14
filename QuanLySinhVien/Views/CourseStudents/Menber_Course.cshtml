@@ -1,0 +1,45 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.CourseMember>
+@{
+    ViewData["Title"] = "Menber_Course";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<h1>Danh sách thành viên khóa học</h1>
+<a href="@ViewBag.UrlCourse">Trở về khóa học</a>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Tên sinh viên</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="trow_@item.Id">
+                        <td>@item.Mssv</td>
+                        <td>@item.Name</td>
+
+                   
+
+                       
+                    </tr>
+
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>Rỗng</td>
+                </tr>
+            }
+
+            <!-- More rows -->
+        </tbody>
+    </table>
+</div>
+

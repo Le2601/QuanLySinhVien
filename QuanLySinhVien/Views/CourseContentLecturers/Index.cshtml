@@ -1,0 +1,132 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.CourseContent>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+
+<h1>Danh sách khóa học</h1>
+
+<p>
+    <a asp-action="Create" >Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tiêu đề</th>
+                <th>Nội dung</th>
+                <th>Tài liệu</th>
+                <th>Bài tập</th>
+                
+                <th>Ngày kết thúc</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="trow_@item.Id">
+                        <td>@item.Title</td>
+                        <td>@item.Course.Alias</td>
+                        <td>
+
+                            @if(item.IsUpload == true)
+                            {
+                                
+                            }
+                            else
+                            {
+                            <form action="/CourseContentLecturers/UploadFilesCourseContent/@item.Id" class="dropzone" id="my-dropzone">
+                                </form>
+                            }
+
+                        </td>
+                      
+                        @if (item.IsUpload == true)
+                        {
+                            <td><a class="btn btn-secondary" href="/@item.Course.Alias/@item.Alias-@item.Id">Tạo bài tập </a></td>
+                        }
+                        else
+                        {
+                            <td>Không có bài tập</td>
+                        }
+
+                       
+                       
+
+
+                        <td>
+                            <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                            <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>Rỗng</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("complete", function (file) {
+                    console.log(file.name + " uploaded");
+                });
+            },
+            sending: function (file, xhr, formData) {
+                formData.append("additionalData", "Additional data goes here");
+            }
+        };
+    </script>
+
+
+   @*  <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data('id');
+
+                var conf = confirm("ban muoon xoa chua");
+
+                if (conf == true) {
+
+                    $.ajax({
+
+                        url: '/CourseLecturers/delete',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+
+                                $('trow_' + id).remove();
+
+                                location.reload();
+
+                            }
+                        }
+
+                    });
+
+                }
+            });
+        });
+    </script> *@
+
+
+}
+
+
+
+

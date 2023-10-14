@@ -1,0 +1,76 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.UploadAssignment>
+@{
+    ViewData["Title"] = "Student_Submit";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+
+
+<h1>Nội dung thực hành</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="ExerciseContentLecturers">Create New</a>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Tài liệu</th>
+@* 
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th> *@
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="trow_@item.Id">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                       @*  <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td> *@
+                  @*       <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td> *@
+
+
+                        <td>
+                             <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                           @*  <a asp-action="Student_Submit" asp-route-id="@item.Id">Xem thành viên đã nộp bài</a> *@
+
+
+                            @*                             <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+                    *@
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>Rỗng</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

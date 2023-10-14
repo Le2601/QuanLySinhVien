@@ -1,0 +1,31 @@
+﻿@using QuanLySinhVien.Models
+@model QuanLySinhVien.Models.Course
+@{
+    ViewData["Title"] = "ViewDetail_Course";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+
+    List<CourseContent> IsCourseContents = ViewBag.IsCourseContent;
+
+}
+ 
+
+@*PARTIAL VIEW CourseContents*@
+<h1>@ViewBag.TitleCourse - @ViewBag.NameGv</h1>
+<a href="/Member_Course/@ViewBag.IdCourse">Xem thành viên</a>
+<br />
+@await Html.PartialAsync("_PartialCourseContents",IsCourseContents)
+
+
+
+
+@section Scripts{
+
+    <script>
+       
+    </script>
+
+
+}
+
+
+

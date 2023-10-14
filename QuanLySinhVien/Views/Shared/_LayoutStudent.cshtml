@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuanLySinhVien</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+    @* bootsstrap 4*@
+    <link href="~/user/css/bootstrap.min.css" rel="stylesheet" />
+    
+    
+
+</head>
+
+
+<body>
+   
+    <header>
+
+        @await Component.InvokeAsync("MenuTopStudents")
+
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3" style="height:900px">
+
+            @await Component.InvokeAsync("MenuStudents")
+
+            @RenderBody()
+
+
+
+
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+
+            @if (ViewData["AccountId"] == null)
+            {
+
+                <a class="nav-link text-dark" href="dang-nhap.html">Admin</a>
+            }
+            else
+            {
+
+                <a class="nav-link text-dark" href="admin.html">Admin</a>
+            }
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* bootsstrap 4*@
+    <script src="~/user/js/bootstrap.min.js"></script>
+    <script src="~/user/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="~/user/js/popper.min.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+</body>
+</html>

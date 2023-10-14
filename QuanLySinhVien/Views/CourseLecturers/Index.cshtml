@@ -1,0 +1,109 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+
+
+<h1>Danh sách khóa học</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="table-responsive">
+<table class="table">
+     <thead>
+      <tr>
+        <th>Xem thành viên</th>
+        <th>Thêm nội dung</th>
+        <th>Khóa học</th>
+        <th>Học kỳ</th>
+        <th>Password</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+@if(Model != null){
+            foreach (var item in Model) {
+        <tr id="trow_@item.Id">
+            <td><a href="/CourseMemberLecturers/@item.Alias-@item.Id" class="btn btn-primary" >Show</a></td>
+            <td><a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-success">Thêm</a></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.SemesterCourse.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+         
+           
+            <td>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                
+                <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+            </td>
+                </tr>
+            }  
+        }
+        else
+        {
+            <tr>
+                <td>Rỗng</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+</div>
+
+
+@section Scripts{
+
+   <script>
+        $(document).ready(function(){
+            $('body').on('click','.btnDelete',function(){
+                var id = $(this).data('id');
+
+                var conf = confirm("ban muoon xoa chua");
+
+                if(conf == true){
+
+                    $.ajax({
+
+                        url: '/CourseLecturers/delete',
+                        type: 'post',
+                        data: {id:id},
+                        success: function(rs){
+                            if(rs.success){
+
+                                $('trow_'+id).remove();
+
+                                location.reload();
+
+                            }
+                        }
+
+                    });
+
+                }
+            });
+        });
+    </script>
+  
+
+}
+
+
+

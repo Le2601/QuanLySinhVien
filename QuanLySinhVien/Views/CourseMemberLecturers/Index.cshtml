@@ -1,0 +1,91 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.CourseMember>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+<h1>Danh sách thành viên khóa học</h1>
+
+<div class="table-responsive">
+    <a style="color:white" asp-controller="CourseMemberLecturers" asp-action="Attendance" asp-route-id="@ViewBag.GetIdCourse"  class="btn btn-success" >Điểm danh</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>MSSV</th>
+        <th>Tên sinh viên</th>
+        <th>Số buổi vắng</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        @if(Model != null){
+            foreach (var item in Model) {
+                      <tr id="trow_@item.Id">
+                        <td>@item.Mssv</td>
+                        <td>@item.Name</td>
+                        
+                            @if(item.Attendance == null)
+                            {
+                                     <td>0</td>
+                            }
+                            else
+                            {
+                                <td>@item.Attendance</td>
+                            }
+                         <td>@item.Email</td>
+                        
+                        <td>
+                              <a style="color:white" class="btn btn-danger btnDelete" data-id="@item.Id" >Xóa khỏi lớp</a>
+                        </td>
+                      </tr>
+                      
+            }  
+        }
+        else
+        {
+            <tr>
+                <td>Rỗng</td>
+            </tr>
+        }
+
+      <!-- More rows -->
+    </tbody>
+  </table>
+</div>
+
+
+@section Scripts{
+
+   <script>
+        $(document).ready(function(){
+            $('body').on('click','.btnDelete',function(){
+                var id = $(this).data('id');
+
+                var conf = confirm("ban muoon xoa chua");
+
+                if(conf == true){
+
+                    $.ajax({
+
+                        url: '/CourseMemberLecturers/delete',
+                        type: 'post',
+                        data: {id:id},
+                        success: function(rs){
+                            if(rs.success){
+
+                                $('trow_'+id).remove();
+
+                                location.reload();
+
+                            }
+                        }
+
+                    });
+
+                }
+            });
+        });
+    </script>
+  
+
+}

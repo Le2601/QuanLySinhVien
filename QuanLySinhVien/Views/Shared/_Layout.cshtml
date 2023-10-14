@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - QuanLySinhVien</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+   @* bootsstrap 4*@
+<link href="~/user/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+
+
+<body>
+
+    <header>
+    
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+@*             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Học tập trực tuyến</a>
+ *@            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Học tập trực tuyến</a>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <form>
+                            <input type="text" placeholder="Tìm kiếm khóa học" />
+                            <input type="submit" value="Tìm kiếm" />
+                        </form>
+                      
+                       
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-link text-dark" style="padding-left: 20.5rem">Mời bạn <a href="UserLogin.html">đăng nhập</a></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <br />
+
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+
+
+
+
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+          
+                              @if ( ViewData["AccountId"] == null)
+                                {
+       
+                                      <a class="nav-link text-dark" href="dang-nhap.html">Admin</a>
+                                }
+                                else
+                                {
+    
+                                     <a class="nav-link text-dark"href="admin.html">Admin</a>
+                                }
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+     @* bootsstrap 4*@
+     <script src="~/user/js/bootstrap.min.js"></script>
+<script src="~/user/js/jquery-3.2.1.slim.min.js"></script>
+<script src="~/user/js/popper.min.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+</body>
+</html>

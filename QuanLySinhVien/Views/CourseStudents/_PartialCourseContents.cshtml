@@ -1,0 +1,38 @@
+﻿@using QuanLySinhVien.Models
+
+@model List<CourseContent>
+
+
+
+
+ @if (Model != null && Model.Count() > 0)
+    {
+        
+        foreach (var item in Model)
+        {
+        <a style="font-size:30px" data-toggle="collapse" data-target="#danh-sach_@item.Id">@item.Title </a>
+       
+        <br />
+       
+
+                 <div id="danh-sach_@item.Id" class="collapse">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            @if (item.IsUpload == true)
+                            {
+                                <a href="/thuc-hanh/@item.Id" class="CourseFiles" data-id="@item.Id">Xem nội dung thực hành</a>
+                            }
+                            else
+                            {
+                             
+                                <a href="~/uploads/coursecontentfiles/@item.DataName">@item.DataName</a>
+
+
+                            }
+                        </li>
+       
+                    </ul>
+                </div>
+        <hr />
+    }
+}

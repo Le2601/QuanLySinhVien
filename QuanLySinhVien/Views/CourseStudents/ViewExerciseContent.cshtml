@@ -1,0 +1,22 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.ExerciseContent>
+@{
+    ViewData["Title"] = "ViewExerciseContent";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+ @if (Model != null && Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <hr />
+
+        <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id" >@item.Title</a>
+        <br />
+        <span>
+            @item.Description
+        </span>
+        <hr />
+
+    }
+}
+

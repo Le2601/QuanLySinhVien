@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "UploadsFile";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>UploadsFile idcourse: @ViewBag.IdUploadFile</h1>
+
+<form action="/Admin/Course/UploadFiles/@ViewBag.IdUploadFile" class="dropzone" id="my-dropzone">
+
+       
+        
+</form>
+
+@section scripts{
+
+  <script>
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("complete", function (file) {
+                    console.log(file.name + " uploaded");
+                });
+            },
+            sending: function (file, xhr, formData) {
+                formData.append("additionalData", "Additional data goes here");
+            }
+        };
+    </script>
+
+}
+
+
+

@@ -1,0 +1,55 @@
+﻿@model QuanLySinhVien.Areas.Admin.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<form asp-area="Admin" asp-controller="Accounts" asp-action="Login" method="post" >
+       <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+
+    <div class="input-group mb-3">
+       @* @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Tai khoan" })*@
+       <input type="text" asp-for="Email"  placeholder = "Tai khoan" class = "form-control"  >
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+       @* @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "mat khai" })*@
+        <input type="password" asp-for="Password"  placeholder = "Mat khau" class = "form-control"  >
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="icheck-primary">
+                @*@Html.CheckBoxFor(x =>x.RememberMe)*@
+                <label for="remember">
+                    Remember Me
+                </label>
+            </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <div>123 @ViewBag.Error </div>
+</form>
+
+
+
+
+
+
