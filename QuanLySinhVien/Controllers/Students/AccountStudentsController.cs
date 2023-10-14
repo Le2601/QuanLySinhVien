@@ -50,6 +50,8 @@ namespace QuanLySinhVien.Controllers.Students
         {
             try
             {
+              
+
                 if (ModelState.IsValid)
                 {
                     Account kh = _context.Account.Include(a => a.Role)
@@ -60,14 +62,14 @@ namespace QuanLySinhVien.Controllers.Students
 
                     if (kh == null )
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "tài khoản không tồn tại";
                         return View(model);
                     }
                     string pass = (model.Password.Trim()).ToMD5();
 
                     if (kh.Password.Trim() != pass)
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "Mật khẩu sai";
                         return View(model);
                     }
                     if (kh != null && kh.RoleId == 5)

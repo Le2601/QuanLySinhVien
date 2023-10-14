@@ -95,7 +95,7 @@ namespace QuanLySinhVien.Controllers.Students
 
             ViewBag.IdCourse = item.Id;
 
-            //lay session vao trang admin 
+            //lay session vao trang admin
 
             string loginAdmin = HttpContext.Session.GetString("AccountId_Student");
 

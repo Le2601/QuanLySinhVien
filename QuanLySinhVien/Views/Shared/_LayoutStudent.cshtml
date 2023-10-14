@@ -24,12 +24,20 @@
 
 
     </header>
-    <div class="container">
+
+    
+    <div class="">
         <main role="main" class="pb-3" style="height:900px">
 
             @await Component.InvokeAsync("MenuStudents")
+            
+           
+            <div class="container" style="max-width: 1400px;">
+                @RenderBody()
+            </div>
+            
 
-            @RenderBody()
+           
 
 
 
