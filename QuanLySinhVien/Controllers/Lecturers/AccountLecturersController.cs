@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using QuanLySinhVien.Extension;
 using QuanLySinhVien.Models;
 using QuanLySinhVien.ModelView;
 
@@ -62,7 +63,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
                         return View(model);
                     }
 
-                    string pass = model.Password.Trim();
+                    string pass = (model.Password.Trim()).ToMD5();
 
                     if (kh.Password.Trim() != pass)
                     {

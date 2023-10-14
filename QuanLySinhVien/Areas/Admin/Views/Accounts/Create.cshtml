@@ -18,11 +18,11 @@
             <a href="/admin/home" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/Category" class="nav-link">Danh muc</a>
+            <a href="#" class="nav-link">Account</a>
         </li>
 
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/Category/Create" class="nav-link">Thêm mới</a>
+            <a href="#" class="nav-link">Thêm mới</a>
         </li>
     </ul>
 }
@@ -43,7 +43,7 @@
                 <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
+                <label  class="control-label">Mã số </label>
                 <input asp-for="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
             </div>
@@ -72,27 +72,15 @@
                     <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
                 </label>
             </div>
-          @*  <div class="form-group">
-                <label asp-for="RoleId" class="control-label"></label>
-                <select asp-for="RoleId" class ="form-control" asp-items="ViewBag.RoleId"></select>
-            </div>*@
 
-                  <div class="col-md-10">
-                        <label for="exampleInputEmail1">Danh muc bai viet</label>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phân quyền</label>
                         @*<input type="text" name="title" class="form-control" placeholder="Nhập">*@
-                        @Html.DropDownListFor(x => x.RoleId, ViewBag.RoleId as SelectList, "Chon danh muc ", new { @class = "form-control", @placeholder = "tên " })
+                        @Html.DropDownListFor(x => x.RoleId, ViewBag.RoleId as SelectList, "Loại tài khoản", new { @class = "form-control", @placeholder = "tên " })
                         @Html.ValidationMessageFor(x => x.RoleId, null, new { @class = "text-danger" })
                     </div>
-            <div class="form-group">
-                <label asp-for="LastLogin" class="control-label"></label>
-                <input asp-for="LastLogin" class="form-control" />
-                <span asp-validation-for="LastLogin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
+      
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

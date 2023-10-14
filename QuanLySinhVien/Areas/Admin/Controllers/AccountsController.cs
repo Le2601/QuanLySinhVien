@@ -209,14 +209,14 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
                     if (kh == null)
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "Tài khoản không tồn tại";
                         return View(model);
                     }
-                    string pass = model.Password.Trim();
+                    string pass = (model.Password.Trim()).ToMD5();
 
                     if (kh.Password.Trim() != pass)
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "Sai mật khâu";
                         return View(model);
                     }
                     
