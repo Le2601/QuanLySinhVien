@@ -28,20 +28,22 @@
        
 
     </header>
-    <div class="container">
+    <div>
         <main role="main" class="pb-3">
 
             
             @await Component.InvokeAsync("MenuLecturers")
 
-            @RenderBody()
+            <div class="container" style="max-width: 1400px;">
+                @RenderBody()
+            </div>
 
 
 
 
 
         </main>
-    </div>
+    </div->
 
     <footer class="border-top footer text-muted">
         <div class="container">

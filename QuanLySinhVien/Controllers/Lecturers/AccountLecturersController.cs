@@ -95,7 +95,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
                         new Claim(ClaimTypes.Name, kh.FullName),
                         new Claim(ClaimTypes.Email, kh.Email),
-                        new Claim("AccountId", kh.Id.ToString()),
+                        new Claim("AccountId_Lecturers", kh.Id.ToString()),
                         new Claim("RoleId", kh.RoleId.ToString()),
                         new Claim(ClaimTypes.Role, kh.Role.RoleName)
 

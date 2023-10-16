@@ -25,6 +25,10 @@ namespace QuanLySinhVien.Models
 
         public byte[] Data { get; set; }
 
+
+        [Required(AllowEmptyStrings = true)]
+        public string DataName { get; set; }
+
         public DateTime UpdateDay { get; set; }
 
 

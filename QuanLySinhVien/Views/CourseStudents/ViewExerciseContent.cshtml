@@ -11,12 +11,33 @@
         <hr />
 
         <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id" >@item.Title</a>
+    
         <br />
         <span>
             @item.Description
         </span>
+        <form action="/CourseContentLecturers/UploadFilesCourseContent/@item.Id" class="dropzone" id="my-dropzone">
+        </form>
         <hr />
 
     }
+}
+
+@section Scripts{
+
+    <script>
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("complete", function (file) {
+                    console.log(file.name + " uploaded");
+                });
+            },
+            sending: function (file, xhr, formData) {
+                formData.append("additionalData", "Additional data goes here");
+            }
+        };
+    </script>
+
+
 }
 

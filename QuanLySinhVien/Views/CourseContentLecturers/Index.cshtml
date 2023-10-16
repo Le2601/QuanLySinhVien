@@ -38,8 +38,15 @@
                             }
                             else
                             {
-                            <form action="/CourseContentLecturers/UploadFilesCourseContent/@item.Id" class="dropzone" id="my-dropzone">
-                                </form>
+                                if(item.Data != null)
+                                {
+                                    <a href="~/uploads/coursecontentfiles/@item.DataName">@item.DataName</a>
+                                }
+                                else
+                                {
+                                    <form action="/CourseContentLecturers/UploadFilesCourseContent/@item.Id" class="dropzone" id="my-dropzone">
+                                    </form>
+                                }
                             }
 
                         </td>
