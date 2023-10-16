@@ -40,6 +40,7 @@
     <Folder Include="wwwroot\images\TaiLieu\" />
     <Folder Include="wwwroot\uploads\" />
     <Folder Include="wwwroot\uploads\CourseContentFiles\" />
+    <Folder Include="wwwroot\uploads\Demo\" />
   </ItemGroup>
 
 </Project>

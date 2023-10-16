@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace QuanLySinhVien.Controllers.Lecturers
 {
-
+    [Authorize(Roles = "Employee")]
     public class CourseLecturersController : Controller
     {
         private readonly ElearingDbContext _context;
@@ -27,7 +28,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
         public IActionResult Index()
         {
 
-            var taikhoan = HttpContext.Session.GetString("AccountId");
+            var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
             int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
 
@@ -55,7 +56,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
             {
                 model.Alias = Helpper.Utilities.SEOUrl(model.Title);
 
-                var taikhoan = HttpContext.Session.GetString("AccountId");
+                var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
                 int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
 

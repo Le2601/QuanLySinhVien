@@ -10,8 +10,8 @@ using System;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-  
-    [Authorize]
+
+    [Authorize(Roles = "Employee,Admin")]
     public class HomeController : Controller
     {
         private readonly ElearingDbContext _context;

@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace QuanLySinhVien.Controllers.Lecturers
 {
     //[Authorize] //bat xac thuc trc khi vao trang nay
-    [Authorize(Roles = "Employee,Admin")]
+    [Authorize(Roles = "Employee")]
+
     public class HomeLecturersController : Controller
     {
         private readonly ElearingDbContext _context;
@@ -24,6 +25,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
         public IActionResult Index()
         {
+
             return View();
         }
     }

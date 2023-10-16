@@ -16,7 +16,8 @@ using QuanLySinhVien.ModelView;
 
 namespace QuanLySinhVien.Controllers.Lecturers
 {
-    [Authorize] //bat xac thuc trc khi vao trang nay
+   
+    [Authorize(Roles = "Employee")]
     public class AccountLecturersController : Controller
     {
         private readonly ElearingDbContext _context;
@@ -36,7 +37,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
         public IActionResult Login(string returnUrl = null)
         {
-            var taikhoanID = HttpContext.Session.GetString("AccountId");
+            var taikhoanID = HttpContext.Session.GetString("AccountId_Lecturers");
             if (taikhoanID != null)
             {
                 return RedirectToAction("Index", "HomeLecturers");
@@ -79,13 +80,13 @@ namespace QuanLySinhVien.Controllers.Lecturers
                     _context.Update(kh);
                     await _context.SaveChangesAsync();
 
-                    var taikhoan = HttpContext.Session.GetString("AccountId");
+                    var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
                     //identity
 
                     //luu session makh
 
-                    HttpContext.Session.SetString("AccountId", kh.Id.ToString());
+                    HttpContext.Session.SetString("AccountId_Lecturers", kh.Id.ToString());
 
                     //edentity
 
@@ -134,7 +135,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
             try
             {
                 HttpContext.SignOutAsync();
-                HttpContext.Session.Remove("AccountId");
+                HttpContext.Session.Remove("AccountId_Lecturers");
                 return RedirectToAction("Login", "AccountLecturers");
             }
             catch

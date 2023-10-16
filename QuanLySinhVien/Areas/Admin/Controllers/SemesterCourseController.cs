@@ -14,7 +14,7 @@ using QuanLySinhVien.DI.SemesterCourses;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize] //bat xac thuc trc khi vao trang nay
+    [Authorize(Roles = "Employee,Admin")]
     public class SemesterCourseController : Controller
     {
 

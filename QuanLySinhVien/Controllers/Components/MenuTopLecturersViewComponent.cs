@@ -19,12 +19,12 @@ namespace QuanLySinhVien.Controllers.Components
         public IViewComponentResult Invoke()
         {
             var taikhoan = "";
-             taikhoan = HttpContext.Session.GetString("AccountId");
+             taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
-            if (taikhoan == null)
-            {
-                taikhoan = HttpContext.Session.GetString("AccountId_Student");
-            }
+            //if (taikhoan == null)
+            //{
+            //    taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+            //}
            
 
 

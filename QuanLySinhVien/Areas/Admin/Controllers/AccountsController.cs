@@ -22,8 +22,7 @@ using System.Text;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize] //bat xac thuc trc khi vao trang nay
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AccountsController : Controller
     {
         private readonly ElearingDbContext _context;

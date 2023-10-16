@@ -34,6 +34,7 @@ namespace QuanLySinhVien.Models
 
         public int Location { get; set; }
 
+        [Display(Name = "Bài tập thực hành")]
         public bool IsUpload { get; set; }
 
         public virtual Course Course { get; set; }

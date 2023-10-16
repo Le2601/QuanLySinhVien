@@ -12,7 +12,7 @@ using QuanLySinhVien.DI.Departments;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize] //bat xac thuc trc khi vao trang nay
+    [Authorize(Roles = "Employee,Admin")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentsRepository _departmentsRepository;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace QuanLySinhVien.Controllers.Lecturers
 {
+    [Authorize(Roles = "Employee")]
     public class ExerciseContentLecturersController : Controller
     {
         private readonly ElearingDbContext _context;

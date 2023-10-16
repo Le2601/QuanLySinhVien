@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize] //bat xac thuc trc khi vao trang nay
+    [Authorize(Roles = "Employee,Admin")]
 
     public class CourseController : Controller
     {
