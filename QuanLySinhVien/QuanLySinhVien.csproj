@@ -38,9 +38,9 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\images\Articles\" />
     <Folder Include="wwwroot\images\TaiLieu\" />
-    <Folder Include="wwwroot\uploads\" />
     <Folder Include="wwwroot\uploads\CourseContentFiles\" />
     <Folder Include="wwwroot\uploads\Demo\" />
+    <Folder Include="wwwroot\uploads\UploadAssignment\" />
   </ItemGroup>
 
 </Project>

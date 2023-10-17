@@ -1,7 +1,10 @@
-﻿@model IEnumerable<QuanLySinhVien.Models.ExerciseContent>
+﻿@using QuanLySinhVien.Models
+@model IEnumerable<QuanLySinhVien.Models.ExerciseContent>
 @{
     ViewData["Title"] = "ViewExerciseContent";
     Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+
+    // List<UploadAssignment> IsUploadAssignment = ViewBag.UploadAssignment;
 }
 
  @if (Model != null && Model.Count() > 0)
@@ -16,8 +19,24 @@
         <span>
             @item.Description
         </span>
-        <form action="/CourseContentLecturers/UploadFilesCourseContent/@item.Id" class="dropzone" id="my-dropzone">
+     @*    @foreach (var item_UploadAssignment in IsUploadAssignment)
+        {
+            if (item_UploadAssignment.ExerciseContentId != item.Id && item_UploadAssignment.AccountId != ViewBag.GetIdAccount)
+            {
+                
+                <form action="/CourseStudents/UploadAssignment/@item.Id" class="dropzone" id="my-dropzone">
+                </form>
+            }
+            else
+            {
+                <div>Đã nộp bài</div>
+            }
+        } *@
+        <form action="/UploadAssignment/UploadAssignment/@item.Id" class="dropzone" id="my-dropzone">
         </form>
+
+       
+       
         <hr />
 
     }

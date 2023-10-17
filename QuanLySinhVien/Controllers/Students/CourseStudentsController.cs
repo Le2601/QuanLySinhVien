@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QuanLySinhVien.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,10 +20,12 @@ namespace QuanLySinhVien.Controllers.Students
     public class CourseStudentsController : Controller
     {
         private readonly ElearingDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public CourseStudentsController(ElearingDbContext context)
+        public CourseStudentsController(ElearingDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -139,6 +144,19 @@ namespace QuanLySinhVien.Controllers.Students
         {
             var items = _context.ExerciseContents.Where(x => x.CourseContentId == id).ToList();
 
+            //lay session vao trang admin
+
+            //string loginStudent = HttpContext.Session.GetString("AccountId_Student");
+
+            //int soNguyen = int.Parse(loginStudent);
+
+
+            //var items_UploadAssignment = _context.UploadAssignments.ToList();
+
+            //ViewBag.UploadAssignment = items_UploadAssignment;
+
+            //ViewBag.GetIdAccount = soNguyen;
+
             return View(items);
         }
 
@@ -156,6 +174,8 @@ namespace QuanLySinhVien.Controllers.Students
 
             return View(items);
         }
+
+        
 
 
     }
