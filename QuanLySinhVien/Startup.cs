@@ -58,7 +58,8 @@ namespace QuanLySinhVien
                .AddCookie(p =>
                {
                    p.Cookie.Name = "UserLoginCookie";
-                   p.ExpireTimeSpan = TimeSpan.FromDays(1);
+                   //xet tg ton tai cua phien dang nhap
+                   p.ExpireTimeSpan = TimeSpan.FromHours(1);
                    p.LoginPath = "/login-student.html";
                    //p.LogoutPath = "/dang-xuat/html";
                    //p.AccessDeniedPath = "/not-found.html";
@@ -68,7 +69,9 @@ namespace QuanLySinhVien
             // Cấu hình DI
             services.AddScoped<IDepartmentsRepository, DepartmentsRepository>();
 
-           
+            //kỹ thuật oage caching  lưu trữ vào bộ nhớ cache giảm tg phản hồi
+            services.AddResponseCaching();
+
 
             services.AddScoped<IRoleRepository, RoleRepository>();
 
@@ -97,7 +100,8 @@ namespace QuanLySinhVien
             }
             app.UseHttpsRedirection();
 
-          
+            app.UseResponseCaching();
+
 
             app.UseStaticFiles();
 

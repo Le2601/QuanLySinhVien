@@ -33,9 +33,8 @@ namespace QuanLySinhVien.Controllers.Students
         }
 
 
-      
 
-     
+
 
 
         [Route("/AddToCourse/{alias}-{Id}", Name = "CourseStudentsAdd")]
@@ -92,7 +91,6 @@ namespace QuanLySinhVien.Controllers.Students
            
         }
 
-
         [Route("/details/{alias}-{Id}", Name = "viewDetail")]
         public IActionResult ViewDetail_Course(int id)
         {
@@ -138,6 +136,7 @@ namespace QuanLySinhVien.Controllers.Students
             return View(item);
         }
 
+
         [Route("/thuc-hanh/{Id}", Name = "Xemnoidungthuchanh")]
 
         public IActionResult ViewExerciseContent(int id)
@@ -146,20 +145,19 @@ namespace QuanLySinhVien.Controllers.Students
 
             //lay session vao trang admin
 
-            //string loginStudent = HttpContext.Session.GetString("AccountId_Student");
+            string loginStudent = HttpContext.Session.GetString("AccountId_Student");
 
-            //int soNguyen = int.Parse(loginStudent);
+            int soNguyen = int.Parse(loginStudent);
 
 
-            //var items_UploadAssignment = _context.UploadAssignments.ToList();
+            var items_UploadAssignment = _context.UploadAssignments.ToList();
 
-            //ViewBag.UploadAssignment = items_UploadAssignment;
+            ViewBag.UploadAssignment = items_UploadAssignment;
 
-            //ViewBag.GetIdAccount = soNguyen;
+            ViewBag.GetIdAccount = soNguyen;
 
             return View(items);
         }
-
 
         [Route("/Member_Course/{Id}", Name = "Menber_Course")]
         public IActionResult Menber_Course(int id)

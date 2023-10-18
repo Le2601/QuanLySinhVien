@@ -4,43 +4,49 @@
     ViewData["Title"] = "ViewExerciseContent";
     Layout = "~/Views/Shared/_LayoutStudent.cshtml";
 
-    // List<UploadAssignment> IsUploadAssignment = ViewBag.UploadAssignment;
+    List<UploadAssignment> IsUploadAssignment = ViewBag.UploadAssignment;
 }
 
- @if (Model != null && Model.Count() > 0)
-{
-    foreach (var item in Model)
+
+    @if (Model != null && Model.Count() > 0)
     {
-        <hr />
-
-        <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id" >@item.Title</a>
-    
-        <br />
-        <span>
-            @item.Description
-        </span>
-     @*    @foreach (var item_UploadAssignment in IsUploadAssignment)
+        foreach (var item in Model)
         {
-            if (item_UploadAssignment.ExerciseContentId != item.Id && item_UploadAssignment.AccountId != ViewBag.GetIdAccount)
-            {
-                
-                <form action="/CourseStudents/UploadAssignment/@item.Id" class="dropzone" id="my-dropzone">
-                </form>
-            }
-            else
-            {
-                <div>Đã nộp bài</div>
-            }
-        } *@
-        <form action="/UploadAssignment/UploadAssignment/@item.Id" class="dropzone" id="my-dropzone">
-        </form>
+            <hr />
 
-       
-       
-        <hr />
+        <h2> <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id">@item.Title</a></h2>
 
+          
+        <h3>
+            @item.Description
+        </h3>
+   
+        <span>Ngày bắt đầu: @item.StartDate - Ngày kết thúc: @item.EndDate</span>
+            <br />
+           
+            @foreach (var item_UploadAssignment in IsUploadAssignment)
+            {
+               
+                if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.AccountId == ViewBag.GetIdAccount)
+                {
+
+               
+
+                <div><div style="color:red">Đã nộp bài tập</div>Ngày nộp: @item_UploadAssignment.UpdateDay || <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a></div>
+
+                }
+
+            }
+            <br />
+            @*         <span><a href="/UploadAssignment/UploadAssignment/@item.Id">Nộp bài hoặc thay đổi bài nội</a></span>
+    *@
+            <form action="/UploadAssignment/UploadAssignment/@item.Id" class="dropzone" id="my-dropzone"></form>
+
+
+            <hr />
+
+        }
     }
-}
 
 @section Scripts{
 

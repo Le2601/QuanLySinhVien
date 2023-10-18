@@ -20,6 +20,7 @@ namespace QuanLySinhVien.Controllers
             _context = context;
         }
 
+        [ResponseCache(Duration = 60)] // Caching trong 60 giây
         public IActionResult Index()
         {
 
