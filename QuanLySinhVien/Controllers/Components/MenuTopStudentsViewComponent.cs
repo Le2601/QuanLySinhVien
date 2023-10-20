@@ -18,15 +18,18 @@ namespace QuanLySinhVien.Controllers.Components
         public IViewComponentResult Invoke()
         {
 
-            var taikhoan = HttpContext.Session.GetString("AccountId_Student");
+            //var taikhoan = HttpContext.Session.GetString("AccountId_Student");
 
-            int IdAccount_Student = Int32.Parse(taikhoan); //ep kieu string sang int
+            var GetNameLogin = HttpContext.Session.GetString("AccountName_Student");
+
+            //int IdAccount_Student = Int32.Parse(taikhoan); //ep kieu string sang int
 
 
-            var item = _context.Account.Where(a => a.Id == IdAccount_Student).FirstOrDefault();
+            //var item = _context.Account.Where(a => a.Id == IdAccount_Student).FirstOrDefault();
 
-            ViewBag.NameAccount_Student = item.FullName;
+            //ViewBag.NameAccount_Student = item.FullName;
 
+            ViewBag.GetNameLogin = GetNameLogin;
 
 
             return View();

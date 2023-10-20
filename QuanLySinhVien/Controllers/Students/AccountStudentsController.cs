@@ -89,6 +89,7 @@ namespace QuanLySinhVien.Controllers.Students
 
                         HttpContext.Session.SetString("AccountId_Student", kh.Id.ToString());
 
+                        HttpContext.Session.SetString("AccountName_Student", kh.FullName);
                         //edentity
 
                         var userClaims = new List<Claim>

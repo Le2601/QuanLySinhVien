@@ -25,7 +25,15 @@
                             else
                             {
                              
-                                <a href="~/uploads/coursecontentfiles/@item.DataName">@item.DataName</a>
+                       
+                                if(item.Data == null)
+                                {
+                                 <p>@item.Content</p>
+                                }
+                                else
+                                {
+                                    <a href="~/uploads/coursecontentfiles/@item.DataName">@item.DataName</a>
+                                }
 
 
                             }

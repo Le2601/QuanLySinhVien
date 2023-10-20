@@ -29,7 +29,7 @@
                 {
                     <tr id="trow_@item.Id">
                         <td>@item.Title</td>
-                        <td>@item.Course.Alias</td>
+                        <td>@item.Content</td>
                         <td>
 
                             @if(item.IsUpload == true)
@@ -53,7 +53,7 @@
                       
                         @if (item.IsUpload == true)
                         {
-                            <td><a class="btn btn-secondary" href="/@item.Course.Alias/@item.Alias-@item.Id">Tạo bài tập </a></td>
+                            <td><a class="btn btn-secondary" href="/@item.Course.Alias/@item.Alias-@item.Id">Bài tập thực hành </a></td>
                         }
                         else
                         {
