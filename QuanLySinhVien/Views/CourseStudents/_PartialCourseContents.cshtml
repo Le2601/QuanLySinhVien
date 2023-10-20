@@ -28,10 +28,11 @@
                        
                                 if(item.Data == null)
                                 {
-                                 <p>@item.Content</p>
+                                 <p>@Html.Raw(item.Content)</p>
                                 }
                                 else
                                 {
+                                    <p>@item.Content</p>
                                     <a href="~/uploads/coursecontentfiles/@item.DataName">@item.DataName</a>
                                 }
 

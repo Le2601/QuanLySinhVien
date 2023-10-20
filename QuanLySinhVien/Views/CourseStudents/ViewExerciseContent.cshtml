@@ -7,6 +7,10 @@
     List<UploadAssignment> IsUploadAssignment = ViewBag.UploadAssignment;
 }
 
+@*   dropzone*@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.css" />
+
+
 
     @if (Model != null && Model.Count() > 0)
     {
@@ -49,7 +53,7 @@
     }
 
 @section Scripts{
-
+    <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
     <script>
         Dropzone.options.myDropzone = {
             init: function () {

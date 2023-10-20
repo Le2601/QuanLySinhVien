@@ -7,8 +7,8 @@
 
   
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+@*     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+ *@    <link rel="stylesheet" href="~/css/site.css" />
 
 
    @* bootsstrap 4*@
@@ -16,6 +16,8 @@
 
     @*   dropzone*@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.css" />
+
+
 </head>
 <body style="height:1000px">
     <header>
@@ -43,7 +45,7 @@
 
 
         </main>
-    </div->
+    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -61,18 +63,21 @@
         </div>
 
     </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
      @* bootsstrap 4*@
      <script src="~/user/js/bootstrap.min.js"></script>
 @*<script src="~/user/js/jquery-3.2.1.slim.min.js"></script>*@
 <script src="~/user/js/popper.min.js"></script>
 
+      
+
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -29,7 +29,7 @@
                 {
                     <tr id="trow_@item.Id">
                         <td>@item.Title</td>
-                        <td>@item.Content</td>
+                        <td style="width:200px">@Html.Raw(item.Content)</td>
                         <td>
 
                             @if(item.IsUpload == true)
