@@ -41,6 +41,16 @@ namespace QuanLySinhVien.DI.Departments
             return model;
         }
 
+
+        public async Task<department> UpdateDepartment(department model)
+        {
+            _dbContext.Department.Update(model);
+
+            await _dbContext.SaveChangesAsync();
+
+            return model;
+        }
+
         public async Task<department> Delete(department model)
         {
          

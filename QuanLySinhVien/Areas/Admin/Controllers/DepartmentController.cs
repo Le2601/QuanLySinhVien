@@ -51,6 +51,24 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
         
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+             var get_items = await _departmentsRepository.GetDepartment(id);
+
+           
+
+           return View(get_items);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(department model)
+        {
+            model.Alias = QuanLySinhVien.Helpper.Utilities.SEOUrl(model.Title);
+
+            var UpdateDepartment = await _departmentsRepository.UpdateDepartment(model);
+            
+            return RedirectToAction("index");
+        }
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QuanLySinhVien.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -92,11 +94,11 @@ namespace QuanLySinhVien.Controllers.Students
         }
 
         [Route("/details/{alias}-{Id}", Name = "viewDetail")]
-        public IActionResult ViewDetail_Course(int id)
+        public async Task<IActionResult> ViewDetail_Course(int id)
         {
-            var item = _context.Courses.Where(x => x.Id == id).FirstOrDefault();
+            var item =  _context.Courses.Where(x => x.Id == id).FirstOrDefault();
 
-            ViewBag.IdCourse = item.Id;
+             ViewBag.IdCourse = item.Id;
 
             //lay session vao trang admin
 
@@ -106,7 +108,7 @@ namespace QuanLySinhVien.Controllers.Students
 
 
             //lay ra ten giang vien
-            var NameGv = _context.Account.Where(x => x.Id == item.AccountId).FirstOrDefault();
+            var NameGv =  _context.Account.Where(x => x.Id == item.AccountId).FirstOrDefault();
 
             ViewBag.NameGv = NameGv.FullName;
 
@@ -116,11 +118,12 @@ namespace QuanLySinhVien.Controllers.Students
             //partial view
            
             ViewBag.TitleCourse = item.Title;
-            var ShowCourseContent = _context.CourseContents.Where(x=> x.CourseId == id).ToList();
+            var ShowCourseContent = await _context.CourseContents.Where(x => x.CourseId == id).ToListAsync();   //loi load cham
 
-            
 
-       
+
+
+
 
 
 
@@ -139,7 +142,7 @@ namespace QuanLySinhVien.Controllers.Students
 
         [Route("/thuc-hanh/{Id}", Name = "Xemnoidungthuchanh")]
 
-        public IActionResult ViewExerciseContent(int id)
+        public async Task<IActionResult> ViewExerciseContent(int id)
         {
             var items = _context.ExerciseContents.Where(x => x.CourseContentId == id).ToList();
 
@@ -150,7 +153,7 @@ namespace QuanLySinhVien.Controllers.Students
             int soNguyen = int.Parse(loginStudent);
 
 
-            var items_UploadAssignment = _context.UploadAssignments.ToList();
+            var items_UploadAssignment = await _context.UploadAssignments.ToListAsync();   ///loi load cham
 
             ViewBag.UploadAssignment = items_UploadAssignment;
 

@@ -22,7 +22,7 @@ namespace QuanLySinhVien.DI.Departments
 
         Task<department> CreateDepartment(department model);
 
-        //Task<department> UpdateDepartment(department model);
+        Task<department> UpdateDepartment(department model);
 
         Task<department> Delete(department model);
 
