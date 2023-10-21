@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QuanLySinhVien.Models;
@@ -84,7 +85,7 @@ namespace QuanLySinhVien.Controllers.Students
                     file.CopyTo(fileStream);
                 }
 
-                //end luu du lieu vao wwwroot
+                //end luu du lieu vao wwwroot2
 
 
                 //lay session vao trang admin
@@ -93,22 +94,41 @@ namespace QuanLySinhVien.Controllers.Students
 
                 int soNguyen = int.Parse(loginStudent);
 
+                //kiem tra xem da co ton tai trong db UploadAssignment chuwa neu co roi thi update chua thi add
 
-                // Lưu dữ liệu vào cơ sở dữ liệu
+                var add_or_update = _context.UploadAssignments.Where(x => x.AccountId == soNguyen && x.ExerciseContentId == id).FirstOrDefault();
 
-                var newDocument = new UploadAssignment
+             
+                if (add_or_update != null)
                 {
-                    ExerciseContentId = id,
-                    AccountId = soNguyen,
-                    Alias = "Null",
-                    Data = fileData,
-                    UpdateDay = DateTime.Now,
-                    DataName = file.FileName,
+                    // Cập nhật nội dung (update)
+                    add_or_update.Alias = "Null";
+                    add_or_update.Data = fileData;
+                    add_or_update.UpdateDay = DateTime.Now;
+                    add_or_update.DataName = file.FileName;
 
-                };
+                    _context.Attach(add_or_update);
+                    _context.Entry(add_or_update).State = EntityState.Modified;
 
+                }
 
-                _context.UploadAssignments.Add(newDocument);
+                else
+                {
+                    var newDocument = new UploadAssignment
+                    {
+                        ExerciseContentId = id,
+                        AccountId = soNguyen,
+                        Alias = "Null",
+                        Data = fileData,
+                        UpdateDay = DateTime.Now,
+                        DataName = file.FileName,
+
+                    };
+                    _context.UploadAssignments.Add(newDocument);
+                   
+                    
+                }
+
                 _context.SaveChanges();
 
 

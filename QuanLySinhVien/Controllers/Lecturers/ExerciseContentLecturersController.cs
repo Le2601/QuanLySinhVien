@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QuanLySinhVien.Models;
@@ -70,9 +71,9 @@ namespace QuanLySinhVien.Controllers.Lecturers
         }
 
         //danh sach sv da nop bai
-        public IActionResult Student_Submit(int id)
+        public async Task<IActionResult> Student_Submit(int id)
         {
-            var items = _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).ToList();
+            var items = await _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).ToListAsync();
 
 
             ViewBag.account = new SelectList(_context.Account.ToList(), "Id", "Title");

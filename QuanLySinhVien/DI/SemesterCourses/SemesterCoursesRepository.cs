@@ -39,6 +39,13 @@ namespace QuanLySinhVien.DI.SemesterCourses
             return model;
         }
 
+        public async Task<SemesterCourse> Update(SemesterCourse model)
+        {
+            _dbContext.SemesterCourse.Update(model);
+            await _dbContext.SaveChangesAsync();
+            return model;
+        }
+
         public async Task<SemesterCourse> Delete(SemesterCourse model)
         {
 

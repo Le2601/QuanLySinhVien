@@ -22,7 +22,7 @@ namespace QuanLySinhVien.DI.SemesterCourses
 
         Task<SemesterCourse> Create(SemesterCourse model);
 
-        //Task<department> Update(department model);
+        Task<SemesterCourse> Update(SemesterCourse model);
 
         Task<SemesterCourse> Delete(SemesterCourse model);
 

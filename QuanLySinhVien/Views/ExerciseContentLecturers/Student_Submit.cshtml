@@ -5,21 +5,19 @@
 }
 
 
-<h1>Nội dung thực hành</h1>
+<h1>bài nộp thực hành của sinh viên</h1>
 
-<p>
-    <a asp-action="Create" asp-controller="ExerciseContentLecturers">Create New</a>
-</p>
+
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Name</th>
+                <th>Mã số sinh viên</th>
+                <th>Tên</th>
                 <th>Tài liệu</th>
-@* 
-                <th>Ngày bắt đầu</th>
-                <th>Ngày kết thúc</th> *@
+
+                <th>Ngày nộp</th>
+
                 <th></th>
 
             </tr>
@@ -31,24 +29,17 @@
                 {
                     <tr id="trow_@item.Id">
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.DisplayFor(modelItem => item.Account.Code)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Account.FullName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Data)
+                            @Html.DisplayFor(modelItem => item.DataName)
                         </td>
-                       @*  <td>
-                            @Html.DisplayFor(modelItem => item.Location)
-                        </td>
-
                         <td>
-                            @Html.DisplayFor(modelItem => item.StartDate)
-                        </td> *@
-                  @*       <td>
-                            @Html.DisplayFor(modelItem => item.EndDate)
-                        </td> *@
+                            @Html.DisplayFor(modelItem => item.UpdateDay)
+                        </td>
 
 
                         <td>
