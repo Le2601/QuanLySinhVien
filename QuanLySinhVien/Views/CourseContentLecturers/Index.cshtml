@@ -67,7 +67,7 @@
                         <td>
                             <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
 
-                            <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+                            <a class="btn btn-danger btnDelete" data-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }
@@ -100,7 +100,7 @@
     </script>
 
 
-   @*  <script>
+    <script>
         $(document).ready(function () {
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data('id');
@@ -111,7 +111,7 @@
 
                     $.ajax({
 
-                        url: '/CourseLecturers/delete',
+                        url: '/CourseContentLecturers/delete',
                         type: 'post',
                         data: { id: id },
                         success: function (rs) {
@@ -129,7 +129,7 @@
                 }
             });
         });
-    </script> *@
+    </script>
 
 
 }

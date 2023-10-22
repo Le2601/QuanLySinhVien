@@ -41,9 +41,7 @@ namespace QuanLySinhVien.DI.Courses
 
         IEnumerable<Account> GetAllCreator();
 
-        Task<UpLoadFileTLL> CreateTl(UpLoadFileTLL model);
-
-        Task<IEnumerable<UpLoadFileTLL>> GetTls();
+      
 
 
 

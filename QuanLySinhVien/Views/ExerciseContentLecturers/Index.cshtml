@@ -20,6 +20,7 @@
           
                 <th>Ngày bắt đầu</th>
                 <th>Ngày kết thúc</th>
+                <th>Action</th>
                 <th></th>
 
             </tr>
@@ -46,6 +47,10 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+
+                        <td>
+                            <a class="btn btn-danger btnDelete" data-id="@item.Id">Delete</a>
                         </td>
 
 
@@ -85,7 +90,7 @@
 
                     $.ajax({
 
-                        url: '/CourseLecturers/delete',
+                        url: '/ExerciseContentLecturers/Delete',
                         type: 'post',
                         data: { id: id },
                         success: function (rs) {

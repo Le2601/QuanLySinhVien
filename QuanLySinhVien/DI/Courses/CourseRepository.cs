@@ -87,22 +87,9 @@ namespace QuanLySinhVien.DI.Courses
         }
 
 
-        //upload table tai lieu
-        public async Task<UpLoadFileTLL> CreateTl(UpLoadFileTLL model)
-        {
-            _dbContext.UpLoadFileTLL.Add(model);
-            await _dbContext.SaveChangesAsync();
-            return model;
+      
 
-        }
-
-        public async Task<IEnumerable<UpLoadFileTLL>> GetTls()
-        {
-            return await _dbContext.UpLoadFileTLL.ToListAsync();
-
-
-
-        }
+      
         
 
         //public IEnumerable<Account> GetNameCreator(int id)

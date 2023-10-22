@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Employee,Admin")]
+    [Authorize(Roles = "Admin")]
 
     public class CourseController : Controller
     {
@@ -168,94 +168,8 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
 
 
-        [HttpPost]
-        public async Task<IActionResult> UploadFiles(IFormFile file,int id)
-        {
-
-            var IdUploadFile = id;
-
-            if (file != null && file.Length > 0)
-            {
-                // Kiểm tra định dạng của tệp tin
-                var fileExtension = Path.GetExtension(file.FileName).ToLower();
-                if (fileExtension != ".zip" && fileExtension != ".docx" && fileExtension != ".rar")
-                {
-                    return BadRequest("Invalid file format");
-                }
-
-                // Đọc dữ liệu từ tệp tin
-                byte[] fileData;
-                using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-                {
-                    fileData = binaryReader.ReadBytes((int)file.Length);
-                }
-
-                //luu du lieu vao wwwroot
-                string uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
-
-                // Tạo folder "newFolder" trong thư mục "uploads"
-                string newFolderPath = Path.Combine(uploadsFolder, "Demo");
-                //Directory.CreateDirectory(newFolderPath);
-
-
-                //// Tạo thư mục uploads nếu nó chưa tồn tại
-                //if (!Directory.Exists(uploadsFolder))
-                //{
-                //    Directory.CreateDirectory(uploadsFolder);
-                //}
-
-                // Tạo thư mục uploads nếu nó chưa tồn tại
-                if (!Directory.Exists(newFolderPath))
-                {
-                    Directory.CreateDirectory(newFolderPath);
-                }
-
-
-
-                // Lấy tên tệp tin gốc của file
-                string fileName = file.FileName;
-                string filePath = Path.Combine(newFolderPath, fileName);
-
-                // Lưu tệp tin vào thư mục uploads
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
-
-                //end luu du lieu vao wwwroot.
-
-
-                // Lưu dữ liệu vào cơ sở dữ liệu
-
-                var newDocument = new UpLoadFileTLL
-                {
-                    Title = file.FileName,
-                    Data = fileData,
-                    CourseId = IdUploadFile
-                };
-
-                var CreateI = await _CourseRepository.CreateTl(newDocument);
-
-
-              
-                
-
-                // Trả về thông báo thành công hoặc dữ liệu JSON (tùy chọn)
-                return Ok(new { Message = "File uploaded successfully" });
-            }
-
-            // Trả về thông báo lỗi hoặc dữ liệu JSON (tùy chọn)
-            return BadRequest();
-        }
-
-        public async Task<ActionResult<IEnumerable<UpLoadFileTLL>>> demoListTl()
-        {
-            var items = await _CourseRepository.GetTls();
-
-          
-
-            return View(items);
-        }
+        
+       
 
       
 

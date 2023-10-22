@@ -47,7 +47,7 @@ namespace QuanLySinhVien.Models
 
         public virtual ICollection<ExerciseContent> ExerciseContents { get; set; }
 
-        public virtual ICollection<CourseContentFiles> CourseContentFiles { get; set; }
+      
 
     }
 }

@@ -94,9 +94,11 @@ namespace QuanLySinhVien.Controllers.Students
 
                 int soNguyen = int.Parse(loginStudent);
 
+                var get_Account = _context.Account.Where(x=> x.Id == soNguyen).FirstOrDefault();
+
                 //kiem tra xem da co ton tai trong db UploadAssignment chuwa neu co roi thi update chua thi add
 
-                var add_or_update = _context.UploadAssignments.Where(x => x.AccountId == soNguyen && x.ExerciseContentId == id).FirstOrDefault();
+                var add_or_update = _context.UploadAssignments.Where(x => x.Mssv.Equals(get_Account.Code) && x.ExerciseContentId == id).FirstOrDefault();
 
              
                 if (add_or_update != null)
@@ -117,7 +119,8 @@ namespace QuanLySinhVien.Controllers.Students
                     var newDocument = new UploadAssignment
                     {
                         ExerciseContentId = id,
-                        AccountId = soNguyen,
+                        FullName = get_Account.FullName,
+                        Mssv = get_Account.Code,
                         Alias = "Null",
                         Data = fileData,
                         UpdateDay = DateTime.Now,

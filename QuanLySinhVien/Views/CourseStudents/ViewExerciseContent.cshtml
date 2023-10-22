@@ -31,7 +31,7 @@
             @foreach (var item_UploadAssignment in IsUploadAssignment)
             {
                
-                if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.AccountId == ViewBag.GetIdAccount)
+            if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.Mssv.Equals(ViewBag.GetIdAccount))
                 {
 
                

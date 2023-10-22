@@ -60,7 +60,7 @@ namespace QuanLySinhVien.Models
 
         public virtual ICollection<CourseMember> CourseMember { get; set; }
 
-        public virtual ICollection<UpLoadFileTLL> UpLoadFileTL { get; set; }
+       
 
 
         public virtual ICollection<CourseContent> CourseContents { get; set; }

@@ -12,11 +12,11 @@ namespace QuanLySinhVien.Models
     public class ExerciseContent
     {
 
-        public ExerciseContent() {
+        //public ExerciseContent() {
 
-            UploadAssignment = new HashSet<UploadAssignment>();
+        //    UploadAssignment = new HashSet<UploadAssignment>();
             
-        }
+        //}
         
         [Key]
         public int Id { get; set; }

@@ -18,9 +18,13 @@ namespace QuanLySinhVien.Models
 
         public int ExerciseContentId { get; set; }
 
-        public int AccountId { get; set; }
+        //public int AccountId { get; set; }
 
+        public string FullName { get; set; }
+        [Display(Name = "Mã số sinh viên")]
+        public string Mssv {  get; set; }
 
+        
         public string Alias { get; set; }
 
         public byte[] Data { get; set; }
@@ -34,7 +38,7 @@ namespace QuanLySinhVien.Models
 
         public virtual ExerciseContent ExerciseContent { get; set; }
 
-        public virtual Account Account { get; set; }
+        //public virtual Account Account { get; set; }
 
 
 

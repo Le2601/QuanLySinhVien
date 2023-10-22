@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLySinhVien.Models;
 
 namespace QuanLySinhVien.Migrations
 {
     [DbContext(typeof(ElearingDbContext))]
-    partial class ElearingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231022043124_xoaclassevent")]
+    partial class xoaclassevent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +153,29 @@ namespace QuanLySinhVien.Migrations
                     b.ToTable("CourseContent");
                 });
 
+            modelBuilder.Entity("QuanLySinhVien.Models.CourseContentFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseContentId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseContentId");
+
+                    b.ToTable("CourseContentFiles");
+                });
+
             modelBuilder.Entity("QuanLySinhVien.Models.CourseMember", b =>
                 {
                     b.Property<int>("Id")
@@ -257,12 +282,41 @@ namespace QuanLySinhVien.Migrations
                     b.ToTable("SemesterCourse");
                 });
 
+            modelBuilder.Entity("QuanLySinhVien.Models.UpLoadFileTLL", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("UpLoadFileTLL");
+                });
+
             modelBuilder.Entity("QuanLySinhVien.Models.UploadAssignment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Alias")
                         .HasColumnType("nvarchar(max)");
@@ -274,22 +328,15 @@ namespace QuanLySinhVien.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ExerciseContentId")
                         .HasColumnType("int");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mssv")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateDay")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("ExerciseContentId");
 
@@ -365,6 +412,17 @@ namespace QuanLySinhVien.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("QuanLySinhVien.Models.CourseContentFiles", b =>
+                {
+                    b.HasOne("QuanLySinhVien.Models.CourseContent", "CourseContent")
+                        .WithMany("CourseContentFiles")
+                        .HasForeignKey("CourseContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseContent");
+                });
+
             modelBuilder.Entity("QuanLySinhVien.Models.CourseMember", b =>
                 {
                     b.HasOne("QuanLySinhVien.Models.Course", "Course")
@@ -387,13 +445,32 @@ namespace QuanLySinhVien.Migrations
                     b.Navigation("Coursecontent");
                 });
 
+            modelBuilder.Entity("QuanLySinhVien.Models.UpLoadFileTLL", b =>
+                {
+                    b.HasOne("QuanLySinhVien.Models.Course", "Course")
+                        .WithMany("UpLoadFileTL")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("QuanLySinhVien.Models.UploadAssignment", b =>
                 {
+                    b.HasOne("QuanLySinhVien.Models.Account", "Account")
+                        .WithMany("UploadAssignment")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("QuanLySinhVien.Models.ExerciseContent", "ExerciseContent")
                         .WithMany("UploadAssignment")
                         .HasForeignKey("ExerciseContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Account");
 
                     b.Navigation("ExerciseContent");
                 });
@@ -401,6 +478,8 @@ namespace QuanLySinhVien.Migrations
             modelBuilder.Entity("QuanLySinhVien.Models.Account", b =>
                 {
                     b.Navigation("Courses");
+
+                    b.Navigation("UploadAssignment");
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Models.Course", b =>
@@ -408,10 +487,14 @@ namespace QuanLySinhVien.Migrations
                     b.Navigation("CourseContents");
 
                     b.Navigation("CourseMember");
+
+                    b.Navigation("UpLoadFileTL");
                 });
 
             modelBuilder.Entity("QuanLySinhVien.Models.CourseContent", b =>
                 {
+                    b.Navigation("CourseContentFiles");
+
                     b.Navigation("ExerciseContents");
                 });
 

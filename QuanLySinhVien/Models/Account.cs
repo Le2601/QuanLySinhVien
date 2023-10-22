@@ -41,7 +41,7 @@ namespace QuanLySinhVien.Models
 
         public virtual ICollection<Course> Courses { get; set; }
 
-        public virtual ICollection<UploadAssignment> UploadAssignment { get; set; }
+        //public virtual ICollection<UploadAssignment> UploadAssignment { get; set; }
 
         //public virtual ICollection<CourseMember> CourseMember { get; set; }
 

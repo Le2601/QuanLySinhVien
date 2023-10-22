@@ -19,7 +19,7 @@ using QuanLySinhVien.DI.CourseMembers;
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Employee,Admin")]
+    [Authorize(Roles = "Admin")]
     public class CourseMemberController : Controller
     {
 

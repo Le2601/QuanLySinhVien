@@ -107,83 +107,7 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
         }
 
-        //[HttpPost]
-        //public IActionResult UploadFiles(IFormFile file, int id)
-
-        //{
-        //    if (file != null && file.Length > 0)
-        //    {
-        //        // Kiểm tra định dạng của tệp tin
-        //        var fileExtension = Path.GetExtension(file.FileName).ToLower();
-        //        if (fileExtension != ".zip" && fileExtension != ".docx" && fileExtension != ".rar")
-        //        {
-        //            return BadRequest("Invalid file format");
-        //        }
-
-        //        // Đọc dữ liệu từ tệp tin
-        //        byte[] fileData;
-        //        using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-        //        {
-        //            fileData = binaryReader.ReadBytes((int)file.Length);
-        //        }
-
-        //        //luu du lieu vao wwwroot
-        //        string uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
-
-        //        // Tạo folder "newFolder" trong thư mục "uploads"
-        //        string newFolderPath = Path.Combine(uploadsFolder, "CourseContentFiles");
-        //        //Directory.CreateDirectory(newFolderPath);
-
-
-        //        //// Tạo thư mục uploads nếu nó chưa tồn tại
-        //        //if (!Directory.Exists(uploadsFolder))
-        //        //{
-        //        //    Directory.CreateDirectory(uploadsFolder);
-        //        //}
-
-        //        // Tạo thư mục uploads nếu nó chưa tồn tại
-        //        if (!Directory.Exists(newFolderPath))
-        //        {
-        //            Directory.CreateDirectory(newFolderPath);
-        //        }
-
-
-
-        //        // Lấy tên tệp tin gốc của file
-        //        string fileName = file.FileName;
-        //        string filePath = Path.Combine(newFolderPath, fileName);
-
-        //        // Lưu tệp tin vào thư mục uploads
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            file.CopyTo(fileStream);
-        //        }
-
-        //        //end luu du lieu vao wwwroot
-
-
-        //        // Lưu dữ liệu vào cơ sở dữ liệu
-
-        //        var newDocument = new CourseContentFiles
-        //        {
-        //            Title = file.FileName,
-        //            Data = fileData,
-        //            CourseContentId = id
-        //        };
-
-
-        //        _context.CourseContentFiles.Add(newDocument);
-        //        _context.SaveChanges();
-
-
-
-        //        // Trả về thông báo thành công hoặc dữ liệu JSON (tùy chọn)
-        //        return Ok(new { Message = "File uploaded successfully" });
-        //    }
-
-
-        //    return BadRequest();
-        //}
+       
 
 
 
@@ -276,6 +200,22 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
 
             return BadRequest();
+        }
+
+        public async Task<IActionResult> delete(int id)
+        {
+            var item = await _context.CourseContents.FindAsync(id);
+
+            if (item != null)
+            {
+                 _context.CourseContents.Remove(item);
+
+                await _context.SaveChangesAsync();
+
+                return Json(new {success = true});
+
+            }
+            return Json(new { success = false });
         }
 
     }

@@ -76,11 +76,32 @@ namespace QuanLySinhVien.Controllers.Lecturers
             var items = await _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).ToListAsync();
 
 
-            ViewBag.account = new SelectList(_context.Account.ToList(), "Id", "Title");
+           
 
 
 
             return View(items);
+        }
+
+        [HttpPost]
+
+        public IActionResult Delete(int id)
+        {
+            var item = _context.ExerciseContents.Find(id);
+            if (ModelState.IsValid)
+            {
+                _context.ExerciseContents.Remove(item);
+                _context.SaveChanges();
+
+                var demo = 123;
+                Console.WriteLine(demo);
+
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+
+
+
         }
     }
 }

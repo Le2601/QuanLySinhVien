@@ -151,13 +151,20 @@ namespace QuanLySinhVien.Controllers.Students
             string loginStudent = HttpContext.Session.GetString("AccountId_Student");
 
             int soNguyen = int.Parse(loginStudent);
-
+            var get_Account = _context.Account.Where(x => x.Id == soNguyen).FirstOrDefault();
 
             var items_UploadAssignment = await _context.UploadAssignments.ToListAsync();   ///loi load cham
 
+            
+
             ViewBag.UploadAssignment = items_UploadAssignment;
 
-            ViewBag.GetIdAccount = soNguyen;
+            ViewBag.GetIdAccount = get_Account.Code;
+
+            
+
+
+
 
             return View(items);
         }

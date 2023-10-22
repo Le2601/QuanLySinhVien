@@ -37,7 +37,7 @@ namespace QuanLySinhVien.Models
 
 
 
-        public DbSet<UpLoadFileTLL> UpLoadFileTLL { get; set; }
+       
 
 
         //Năm khóa học
@@ -56,9 +56,9 @@ namespace QuanLySinhVien.Models
 
         public DbSet<UploadAssignment> UploadAssignments { get; set; }
 
-        public DbSet<CourseContentFiles> CourseContentFiles { get; set; }
+     
 
-        public DbSet<Event> Events { get; set; }
+      
 
 
 
@@ -125,10 +125,7 @@ namespace QuanLySinhVien.Models
             //    .HasForeignKey(p => p.AccountId);
                 
 
-            modelBuilder.Entity<UpLoadFileTLL>()
-               .HasOne(p => p.Course)
-               .WithMany(c => c.UpLoadFileTL)
-               .HasForeignKey(p => p.CourseId);
+          
 
 
             modelBuilder.Entity<Course>()
@@ -147,21 +144,21 @@ namespace QuanLySinhVien.Models
                .HasForeignKey(p => p.CourseContentId);
 
 
-            modelBuilder.Entity<UploadAssignment>()
-           .HasOne(p => p.ExerciseContent)
-           .WithMany(c => c.UploadAssignment)
-           .HasForeignKey(p => p.ExerciseContentId);
+
+
+
+
+            //modelBuilder.Entity<UploadAssignment>()
+            // .HasOne(p => p.Account)
+            // .WithMany(c => c.UploadAssignment)
+            // .HasForeignKey(p => p.AccountId);
 
             modelBuilder.Entity<UploadAssignment>()
-             .HasOne(p => p.Account)
-             .WithMany(c => c.UploadAssignment)
-             .HasForeignKey(p => p.AccountId);
+          .HasOne(p => p.ExerciseContent)
+          .WithMany(c => c.UploadAssignment)
+          .HasForeignKey(p => p.ExerciseContentId)
+          .OnDelete(DeleteBehavior.Cascade);
 
-
-            modelBuilder.Entity<CourseContentFiles>()
-             .HasOne(p => p.CourseContent)
-             .WithMany(c => c.CourseContentFiles)
-             .HasForeignKey(p => p.CourseContentId);
 
 
 
