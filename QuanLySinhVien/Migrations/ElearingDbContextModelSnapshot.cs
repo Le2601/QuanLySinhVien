@@ -264,7 +264,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Alias")
+                    b.Property<string>("Aliass")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Data")
@@ -272,9 +272,6 @@ namespace QuanLySinhVien.Migrations
 
                     b.Property<string>("DataName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ExerciseContentId")

@@ -88,13 +88,21 @@ namespace QuanLySinhVien.Controllers.Lecturers
         public IActionResult Delete(int id)
         {
             var item = _context.ExerciseContents.Find(id);
-            if (ModelState.IsValid)
+
+            //xoa bai tap sinh vien da nop
+
+            var item_bt = _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).FirstOrDefault();
+
+
+            if (ModelState.IsValid && item_bt != null)
             {
                 _context.ExerciseContents.Remove(item);
+
+                _context.UploadAssignments.Remove(item_bt);
+
                 _context.SaveChanges();
 
-                var demo = 123;
-                Console.WriteLine(demo);
+          
 
                 return Json(new { success = true });
             }

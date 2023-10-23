@@ -143,6 +143,11 @@ namespace QuanLySinhVien.Models
                .WithMany(c => c.ExerciseContents)
                .HasForeignKey(p => p.CourseContentId);
 
+            modelBuilder.Entity<UploadAssignment>()
+              .HasOne(p => p.ExerciseContent)
+              .WithMany(c => c.UploadAssignment)
+              .HasForeignKey(p => p.ExerciseContentId)
+              .OnDelete(DeleteBehavior.Cascade);
 
 
 
@@ -153,11 +158,7 @@ namespace QuanLySinhVien.Models
             // .WithMany(c => c.UploadAssignment)
             // .HasForeignKey(p => p.AccountId);
 
-            modelBuilder.Entity<UploadAssignment>()
-          .HasOne(p => p.ExerciseContent)
-          .WithMany(c => c.UploadAssignment)
-          .HasForeignKey(p => p.ExerciseContentId)
-          .OnDelete(DeleteBehavior.Cascade);
+
 
 
 
