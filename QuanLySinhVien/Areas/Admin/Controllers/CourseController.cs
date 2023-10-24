@@ -59,6 +59,8 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         {
             ViewBag.department = new SelectList(_CourseRepository.GetDepartments(),"Id","Title");
             ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+
+            ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
             return View();
         }
 

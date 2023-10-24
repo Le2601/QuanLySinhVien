@@ -33,7 +33,7 @@ namespace QuanLySinhVien.Controllers.Students
         [ResponseCache(Duration = 60)] // Caching trong 60 giây
         //upload file
         [HttpPost]
-        public IActionResult UploadAssignment(IFormFile file, int id)
+        public async Task<IActionResult> UploadAssignment(IFormFile file, int id)
         {
 
             
@@ -127,12 +127,12 @@ namespace QuanLySinhVien.Controllers.Students
                         DataName = file.FileName,
 
                     };
-                    _context.UploadAssignments.Add(newDocument);
+                    await _context.UploadAssignments.AddAsync(newDocument);
                    
                     
                 }
 
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
 
 
 
