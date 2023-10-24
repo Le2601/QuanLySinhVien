@@ -89,16 +89,26 @@ namespace QuanLySinhVien.Controllers.Lecturers
         {
             var item = _context.ExerciseContents.Find(id);
 
-            //xoa bai tap sinh vien da nop
+            //lay ra bai sv dua vao id noi dung thuc hanh
+            var item_bt = _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).ToList();
 
-            var item_bt = _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).FirstOrDefault();
-
-
+           
             if (ModelState.IsValid && item_bt != null)
             {
                 _context.ExerciseContents.Remove(item);
 
-                _context.UploadAssignments.Remove(item_bt);
+                //lay ra duoc danh sach duyet trong danh sach va xoa tung doi tuong ben trong danh sach do
+                foreach (var getitem in item_bt)
+                {
+                    //xoa bai tap sinh vien da nop
+                    _context.UploadAssignments.Remove(getitem);
+                }
+
+                    
+
+              
+
+               
 
                 _context.SaveChanges();
 
