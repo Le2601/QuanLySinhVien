@@ -144,14 +144,14 @@ namespace QuanLySinhVien.Controllers.Students
 
         public async Task<IActionResult> ViewExerciseContent(int id)
         {
-            var items = _context.ExerciseContents.Where(x => x.CourseContentId == id).ToList();
+            var items = await _context.ExerciseContents.Where(x => x.CourseContentId == id).ToListAsync();
 
             //lay session vao trang admin
 
             string loginStudent = HttpContext.Session.GetString("AccountId_Student");
 
             int soNguyen = int.Parse(loginStudent);
-            var get_Account = _context.Account.Where(x => x.Id == soNguyen).FirstOrDefault();
+            var get_Account = await _context.Account.Where(x => x.Id == soNguyen).FirstOrDefaultAsync();
 
             var items_UploadAssignment = await _context.UploadAssignments.ToListAsync();   ///loi load cham
 
