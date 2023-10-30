@@ -100,19 +100,37 @@ namespace QuanLySinhVien.Controllers.Students
 
                 var add_or_update = _context.UploadAssignments.Where(x => x.Mssv.Equals(get_Account.Code) && x.ExerciseContentId == id).FirstOrDefault();
 
-             
+              
+
                 if (add_or_update != null)
                 {
+                    //cap nhat xong xoa file cu
+                    // Xác định đường dẫn tới tệp tin cần xóa trong thư mục wwwroot
+                    string filePath_Delete = Path.Combine(newFolderPath, add_or_update.DataName);
+
+                    // Kiểm tra xem tệp tin có tồn tại hay không
+                    if (System.IO.File.Exists(filePath_Delete))
+                    {
+                        // Xóa tệp tin
+                        System.IO.File.Delete(filePath_Delete);
+                    }
+
+
+
                     // Cập nhật nội dung (update)
                     add_or_update.Alias = "Null";
                     add_or_update.Data = fileData;
                     add_or_update.UpdateDay = DateTime.Now;
-                    add_or_update.DataName = file.FileName;
+                    add_or_update.DataName = file.FileName ;
+
+                   
 
                     _context.Attach(add_or_update);
                     _context.Entry(add_or_update).State = EntityState.Modified;
 
                 }
+
+                
 
                 else
                 {
@@ -124,7 +142,7 @@ namespace QuanLySinhVien.Controllers.Students
                         Alias = "Null",
                         Data = fileData,
                         UpdateDay = DateTime.Now,
-                        DataName = file.FileName,
+                        DataName = file.FileName ,
 
                     };
                     await _context.UploadAssignments.AddAsync(newDocument);
