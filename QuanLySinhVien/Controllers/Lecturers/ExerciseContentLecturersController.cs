@@ -21,13 +21,13 @@ namespace QuanLySinhVien.Controllers.Lecturers
     {
         private readonly ElearingDbContext _context;
 
-      
+        private readonly IWebHostEnvironment _environment;
 
-        public ExerciseContentLecturersController(ElearingDbContext context)
+        public ExerciseContentLecturersController(ElearingDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
 
-           
         }
         [Route("/{alias_course}/{alias}-{Id}", Name = "ExerciseContentLecturers")]
         public IActionResult Index(int? id)
@@ -98,8 +98,26 @@ namespace QuanLySinhVien.Controllers.Lecturers
                 _context.ExerciseContents.Remove(item);
 
                 //lay ra duoc danh sach duyet trong danh sach va xoa tung doi tuong ben trong danh sach do
+                //luu du lieu vao wwwroot
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+
+                // Tạo folder "newFolder" trong thư mục "uploads"
+                string newFolderPath = Path.Combine(uploadsFolder, "UploadAssignment");
+
+
                 foreach (var getitem in item_bt)
                 {
+                    //cap nhat xong xoa file cu
+                    // Xác định đường dẫn tới tệp tin cần xóa trong thư mục wwwroot
+                    string filePath_Delete = Path.Combine(newFolderPath, getitem.DataName);
+
+                    // Kiểm tra xem tệp tin có tồn tại hay không
+                    if (System.IO.File.Exists(filePath_Delete))
+                    {
+                        // Xóa tệp tin
+                        System.IO.File.Delete(filePath_Delete);
+                    }
+
                     //xoa bai tap sinh vien da nop
                     _context.UploadAssignments.Remove(getitem);
                 }

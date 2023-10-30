@@ -35,7 +35,7 @@ namespace QuanLySinhVien.Controllers.Students
         [HttpPost]
         public async Task<IActionResult> UploadAssignment(IFormFile file, int id)
         {
-
+            
             
             if (file != null && file.Length > 0)
             {
@@ -161,6 +161,10 @@ namespace QuanLySinhVien.Controllers.Students
 
             return BadRequest();
         }
+
+       
+
+        
 
 
     }
