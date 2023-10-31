@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using QuanLySinhVien.Migrations;
 using QuanLySinhVien.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace QuanLySinhVien.Controllers.Lecturers
 {
@@ -66,22 +68,18 @@ namespace QuanLySinhVien.Controllers.Lecturers
                 _context.SaveChanges();
                 return RedirectToAction("Index", "CourseLecturers");
 
+                //var GetAliasCourse = HttpContext.Session.GetString("AliasCourse");
+
+                //var GetAliasContent = _context.CourseContents.Where(x => x.Id == IdCourseContent).FirstOrDefault();
+
+
+                //return RedirectToAction("Index", new { alias_course = GetAliasCourse, alias = , Id = IdCourseContent });
+
             }
             return View(model);
         }
 
-        //danh sach sv da nop bai
-        public async Task<IActionResult> Student_Submit(int id)
-        {
-            var items = await _context.UploadAssignments.Where(x=> x.ExerciseContentId == id).ToListAsync();
-
-
-           
-
-
-
-            return View(items);
-        }
+        
 
         [HttpPost]
 
@@ -138,6 +136,56 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
 
 
+        }
+
+
+
+        //danh sach sv da nop bai
+        public async Task<IActionResult> Student_Submit(int id)
+        {
+            var items = await _context.UploadAssignments.Where(x => x.ExerciseContentId == id).ToListAsync();
+
+
+
+
+
+
+            return View(items);
+        }
+
+        // xoa bai thuc hanh sinh vien da nop
+
+        public IActionResult Delete_UploadAssignment(int id)
+        {
+            var item =  _context.UploadAssignments.Where(x=> x.Id==id).FirstOrDefault();
+
+           if (item != null)
+            {
+                _context.UploadAssignments.Remove(item);
+                //lay ra duoc danh sach duyet trong danh sach va xoa tung doi tuong ben trong danh sach do
+                //luu du lieu vao wwwroot
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+
+                // Tạo folder "newFolder" trong thư mục "uploads"
+                string newFolderPath = Path.Combine(uploadsFolder, "UploadAssignment");
+
+                //cap nhat xong xoa file cu
+                // Xác định đường dẫn tới tệp tin cần xóa trong thư mục wwwroot
+                string filePath_Delete = Path.Combine(newFolderPath, item.DataName);
+
+                // Kiểm tra xem tệp tin có tồn tại hay không
+                if (System.IO.File.Exists(filePath_Delete))
+                {
+                    // Xóa tệp tin
+                    System.IO.File.Delete(filePath_Delete);
+                }
+                _context.SaveChanges();
+                return Json(new { success = true });
+
+
+            }
+
+            return Json(new { success = false });
         }
     }
 }

@@ -48,8 +48,8 @@
                            @*  <a asp-action="Student_Submit" asp-route-id="@item.Id">Xem thành viên đã nộp bài</a> *@
 
 
-                            @*                             <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
-                    *@
+                         <a class="btn btn-danger btnDelete" data-id="@item.Id" >Delete</a>
+                   
                         </td>
                     </tr>
                 }
@@ -65,3 +65,38 @@
     </table>
 </div>
 
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data('id');
+
+                var conf = confirm("ban muoon xoa chua");
+
+                if (conf == true) {
+
+                    $.ajax({
+
+                        url: '/ExerciseContentLecturers/Delete_UploadAssignment',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+
+                                $('trow_' + id).remove();
+
+                                location.reload();
+
+                            }
+                        }
+
+                    });
+
+                }
+            });
+        });
+    </script>
+
+
+}
