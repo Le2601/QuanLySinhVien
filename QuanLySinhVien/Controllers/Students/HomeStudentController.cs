@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
 using QuanLySinhVien.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuanLySinhVien.Controllers.Students
 {
@@ -49,6 +51,18 @@ namespace QuanLySinhVien.Controllers.Students
 
             return View(models);
         }
+
+        public async Task<IActionResult> Search(string valueCourses)
+
+        {
+
+            var items = await  _context.Courses.Where(x => x.Title.Contains(valueCourses)).ToListAsync();
+
+
+            return View(items);
+
+        }
+        
 
        
     }

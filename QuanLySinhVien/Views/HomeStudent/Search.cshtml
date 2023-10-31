@@ -1,0 +1,22 @@
+﻿@model IEnumerable<QuanLySinhVien.Models.Course>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<h1>ket qua tim kiem</h1>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Title</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No results found.</p>
+}
+
