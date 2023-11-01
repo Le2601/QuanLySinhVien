@@ -1,22 +1,70 @@
-﻿@model IEnumerable<QuanLySinhVien.Models.Course>
+﻿@using System.Globalization;
+@model PagedList.Core.IPagedList<QuanLySinhVien.Models.Course>
 @{
     ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_LayoutStudent.cshtml";
 }
 
-<h1>ket qua tim kiem</h1>
 
-@if (Model.Any())
-{
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>@item.Title</li>
-        }
-    </ul>
-}
-else
-{
-    <p>No results found.</p>
-}
+
+<link href="~/css/listcoursecdn.css" rel="stylesheet" />
+<link href="~/css/listcourse.css" rel="stylesheet" />
+<div class="class=" container-fluid"">
+
+
+    <div class="row">
+
+        <div class="col-lg-10 mx-auto">
+            <h1>Khóa học đã tìm</h1>
+            <div class="career-search mb-60">
+                @*                 <h3 class="top-c-sep">Danh sách khóa học</h3>
+                *@
+                <br />
+
+                <div class="filter-result">
+                    @foreach (var item in Model)
+                    {
+                        <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
+                            <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                                <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                                    Hi
+                                </div>
+                                <div class="job-content">
+                                    <h5 class="text-center text-md-left">@item.Title</h5>
+                                    <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                        <li class="mr-md-4">
+                                            GV: @item.Account.FullName
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="job-right my-4 flex-shrink-0">
+                                <a href="/AddToCourse/@item.Alias-@item.Id" class="btn d-block w-100 d-sm-inline-block btn-light " onclick="return confirm('Bạn muốn tham gia khóa học này?')">Apply now</a>
+                                @*                                 <a data-id="@item.Id" data-alias="@item.Alias" class="btn d-block w-100 d-sm-inline-block btn-light btnAddToCourse Getvalue">Apply now</a>
+                            *@
+                            </div>
+                        </div>
+                    }
+
+
+
+
+                </div>
+
+                @*  note *@
+                <div aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <pager class="pager-container" list="@Model" asp-controller="HomeStudent" asp-action="Index" />
+                    </ul>
+                </div>
+                @*  note *@
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using PagedList.Core;
 using QuanLySinhVien.Models;
@@ -51,15 +52,31 @@ namespace QuanLySinhVien.Controllers.Students
 
             return View(models);
         }
-
-        public async Task<IActionResult> Search(string valueCourses)
+      
+     
+        public IActionResult Search(string valueCourses,int? page)
 
         {
 
-            var items = await  _context.Courses.Where(x => x.Title.Contains(valueCourses)).ToListAsync();
+            string loginStudent = HttpContext.Session.GetString("AccountId_Student");
+
+            int soNguyen = int.Parse(loginStudent);
+
+            //truyen du lieu vao courseMember
+            var InfoAccount = _context.Account.Where(x => x.Id == soNguyen).FirstOrDefault();
 
 
-            return View(items);
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 3;
+
+            var items =  _context.Courses.Where(x => x.Title.Contains(valueCourses)).OrderBy(x => x.Id);
+
+            PagedList<Course> models =  new PagedList<Course>(items, pageNumber, pageSize);
+
+            //var items = await  _context.Courses.Where(x => x.Title.Contains(valueCourses)).ToListAsync();
+            ViewBag.CreateAccount = new SelectList(_context.Account.ToList(), "Id", "Title");
+
+            return View(models);
 
         }
         

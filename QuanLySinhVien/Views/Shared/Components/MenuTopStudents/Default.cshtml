@@ -4,6 +4,31 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ cho menu */
         transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Thời gian và kiểu chuyển đổi */
     }
+
+    .nav-item {
+        position: relative;
+    }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+    }
+
+    .nav-item:hover .submenu {
+        display: block;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #FFFAF0;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-light" id="navbar">
@@ -14,14 +39,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <form action="HomeStudent/Search" method="get">
+                <form action="/HomeStudent/Search" method="get">
                     <input type="text" name="valueCourses" placeholder="Tìm kiếm khóa học" />
                     <input type="submit" value="Tìm kiếm" />
                 </form>
             </li>
             <li class="nav-item">
-                <a style="color:black" class="nav-link" href="/logout-student.html"> @ViewBag.GetNameLogin</a>
-            </li>
+                <a style="color:black" class="nav-link" href="#"> @ViewBag.GetNameLogin</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a class="logout-btn" href="/logout-student.html">Logout</a></li>
+                     
+                    </ul>
+                </div>
+            </li>   
         </ul>
     </div>
 </nav>

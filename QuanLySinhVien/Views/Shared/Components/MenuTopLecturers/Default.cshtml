@@ -1,23 +1,62 @@
-﻿
+﻿<style>
+    .navbar-scrolled {
+        background-color: #f8f9fa; /* Màu nền của menu khi cuộn xuống */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ cho menu */
+        transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Thời gian và kiểu chuyển đổi */
+    }
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Học tập trực tuyến</a>
+    .nav-item {
+        position: relative;
+    }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 999;
+    }
+
+    .nav-item:hover .submenu {
+        display: block;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #FFFAF0;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-light" id="navbar">
+    <a class="navbar-brand" style="color:black" asp-area="" asp-controller="Home" asp-action="Index">Học tập trực tuyến</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <form>
-                    <input type="text" placeholder="Tìm kiếm khóa học" />
+                <form action="/HomeStudent/Search" method="get">
+                    <input type="text" name="valueCourses" placeholder="Tìm kiếm khóa học" />
                     <input type="submit" value="Tìm kiếm" />
                 </form>
             </li>
+           
             <li class="nav-item">
-                <a class="nav-link" href="/logout-giangvien.html">@ViewBag.NameAccount</a>
+                <a style="color:black" class="nav-link" href="#"> @ViewBag.NameAccount</a>
+                <div class="submenu">
+                    <ul>
+                        <li><a class="logout-btn" href="/logout-giangvien.html">Logout</a></li>
+
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
 </nav>
 
-    <br />
+<br />
+<br />
