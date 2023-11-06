@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLySinhVien.Models;
 
 namespace QuanLySinhVien.Migrations
 {
     [DbContext(typeof(ElearingDbContext))]
-    partial class ElearingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231106121319_notnulltitle")]
+    partial class notnulltitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,12 +39,10 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
@@ -59,7 +59,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("varchar(12)");
 
                     b.Property<int?>("RoleId")
-                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("RoleID");
 
@@ -127,7 +126,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CourseId")
@@ -147,7 +145,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -177,7 +174,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -216,7 +212,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -239,7 +234,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RoleName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -259,7 +253,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -317,7 +310,6 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -330,9 +322,7 @@ namespace QuanLySinhVien.Migrations
                     b.HasOne("QuanLySinhVien.Models.Role", "Role")
                         .WithMany("Accounts")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_Accounts_Roles")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasConstraintName("FK_Accounts_Roles");
 
                     b.Navigation("Role");
                 });

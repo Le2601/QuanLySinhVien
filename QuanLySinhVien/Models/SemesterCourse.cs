@@ -19,7 +19,7 @@ namespace QuanLySinhVien.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Nhập tên khoa")]
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Title { get; set; }
 
         public string Alias { get; set; }

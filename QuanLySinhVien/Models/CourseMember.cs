@@ -25,7 +25,7 @@ namespace QuanLySinhVien.Models
         public int? Attendance { get; set; }
 
         //thong ting cua sinh vien
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Name { get; set; }
 
         public string Mssv { get; set; }

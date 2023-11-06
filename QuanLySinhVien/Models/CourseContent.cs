@@ -22,9 +22,9 @@ namespace QuanLySinhVien.Models
         public int Id { get; set; }
 
         public int CourseId { get; set; }
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Title { get; set; }
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Content { get; set; }
 
         public string Alias { get; set; }

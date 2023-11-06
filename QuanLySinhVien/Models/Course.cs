@@ -26,8 +26,7 @@ namespace QuanLySinhVien.Models
 
         [Key]
         public int Id { get; set; }
-
-        [Display(Name = "Nhập tên khóa học")]
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Title { get; set; }
 
         
@@ -38,9 +37,9 @@ namespace QuanLySinhVien.Models
         public string Password { get; set; }
 
         public string Description { get; set; }
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public int DepartmentId { get; set; }
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public int SemesterCourseId { get; set; }
 
 

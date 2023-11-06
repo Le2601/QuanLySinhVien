@@ -25,14 +25,15 @@ namespace QuanLySinhVien.Models
         public int Id { get; set; }
 
         public string Code { get; set; }
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string FullName { get; set; }
         public string Phone { get; set; }
-      
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Email { get; set; }
+       
         public string Password { get; set; }
         public bool Active { get; set; }
-      
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public int? RoleId { get; set; }
         public DateTime? LastLogin { get; set; }
         public DateTime? CreateDate { get; set; }

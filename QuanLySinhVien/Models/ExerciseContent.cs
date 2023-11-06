@@ -24,8 +24,7 @@ namespace QuanLySinhVien.Models
         public int CourseContentId { get; set; }
 
         public string Alias { get; set; }
-
-
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Title { get; set; }
 
         public string Description { get; set; }
