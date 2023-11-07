@@ -2,34 +2,30 @@
 
 namespace QuanLySinhVien.Migrations
 {
-    public partial class notnulltitle : Migration
+    public partial class delRequire : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-           
-
             migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Course",
+                name: "Content",
+                table: "CourseContent",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AlterColumn<string>(
+                name: "Content",
+                table: "CourseContent",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-           
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Course",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
         }
     }
 }

@@ -10,8 +10,8 @@ using QuanLySinhVien.Models;
 namespace QuanLySinhVien.Migrations
 {
     [DbContext(typeof(ElearingDbContext))]
-    [Migration("20231022141705_xoaclassf")]
-    partial class xoaclassf
+    [Migration("20231107112959_loigivay")]
+    partial class loigivay
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,10 +39,12 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
@@ -59,6 +61,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("varchar(12)");
 
                     b.Property<int?>("RoleId")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("RoleID");
 
@@ -101,6 +104,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -125,6 +129,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CourseId")
@@ -144,6 +149,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -173,6 +179,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -211,6 +218,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -233,6 +241,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("RoleName")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -252,6 +261,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -309,6 +319,7 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -321,7 +332,9 @@ namespace QuanLySinhVien.Migrations
                     b.HasOne("QuanLySinhVien.Models.Role", "Role")
                         .WithMany("Accounts")
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_Accounts_Roles");
+                        .HasConstraintName("FK_Accounts_Roles")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
                 });

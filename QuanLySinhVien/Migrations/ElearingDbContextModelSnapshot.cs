@@ -127,10 +127,9 @@ namespace QuanLySinhVien.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("Data")
@@ -368,9 +367,7 @@ namespace QuanLySinhVien.Migrations
                 {
                     b.HasOne("QuanLySinhVien.Models.Course", "Course")
                         .WithMany("CourseContents")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourseId");
 
                     b.Navigation("Course");
                 });

@@ -11,7 +11,7 @@
 
 @*PARTIAL VIEW CourseContents*@
 <h1>@ViewBag.TitleCourse - @ViewBag.NameGv</h1>
-<a href="/Member_Course/@ViewBag.IdCourse">Xem thành viên</a>
+<a class="btn btn-outline-info" href="/Member_Course/@ViewBag.IdCourse">Xem thành viên</a>
 <br />
 @await Html.PartialAsync("_PartialCourseContents",IsCourseContents)
 

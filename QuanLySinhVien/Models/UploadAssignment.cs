@@ -21,7 +21,7 @@ namespace QuanLySinhVien.Models
         //public int AccountId { get; set; }
 
         public string FullName { get; set; }
-        [Display(Name = "Mã số sinh viên")]
+        [Display(Name = "Nhập mã số")]
         public string Mssv {  get; set; }
 
         

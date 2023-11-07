@@ -49,17 +49,21 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-           <a class="nav-link text-dark" href="dang-nhap.html">Admin</a>
-                             @* @if ( ViewData["AccountId"] == null)
-                                {
-       
-                                      <a class="nav-link text-dark" href="dang-nhap.html">Admin</a>
-                                }
-                                else
-                                {
-    
-                                     <a class="nav-link text-dark"href="admin.html">Admin</a>
-                                }*@
+
+
+            <div class="footer-copyright text-center py-3">
+                © 2020 Copyright: Lebaby26
+               @*  @if (ViewData["AccountId"] == null)
+                {
+
+                    <a href="dang-nhap.html">Admin</a>
+                }
+                else
+                {
+
+                    <a href="admin.html">Admin</a>
+                } *@
+            </div>
         </div>
 
     </footer>

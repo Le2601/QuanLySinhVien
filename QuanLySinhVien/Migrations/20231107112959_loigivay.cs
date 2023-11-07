@@ -2,7 +2,7 @@
 
 namespace QuanLySinhVien.Migrations
 {
-    public partial class quanent123 : Migration
+    public partial class loigivay : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
