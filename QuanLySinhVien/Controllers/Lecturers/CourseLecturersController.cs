@@ -72,6 +72,43 @@ namespace QuanLySinhVien.Controllers.Lecturers
             return View(model);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var item = await _context.Courses.FindAsync(id);
+           if (item == null)
+            {
+                return NotFound();
+            }
+            ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
+            ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
+
+            return View(item);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Course model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Alias = Helpper.Utilities.SEOUrl(model.Title);
+
+                var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+
+                int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
+
+                model.AccountId = IdAccount; //luu bien vua ep vao thuoc tinh creator
+
+                 _context.Courses.Update(model);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
+            ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
+            return View(model);
+        }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {

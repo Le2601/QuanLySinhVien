@@ -16,7 +16,7 @@
      <thead>
       <tr>
         <th>Xem thành viên</th>
-        <th>Thêm nội dung</th>
+        <th>Nội dung khóa học</th>
         <th>Khóa học</th>
         <th>Học kỳ</th>
         <th>Password</th>
@@ -29,8 +29,8 @@
 @if(Model != null){
             foreach (var item in Model) {
         <tr id="trow_@item.Id">
-            <td><a href="/CourseMemberLecturers/@item.Alias-@item.Id" class="btn btn-primary" >Show</a></td>
-            <td><a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-success">Thêm</a></td>
+                        <td><a href="/CourseMemberLecturers/@item.Alias-@item.Id" class="btn btn-outline-primary">Show</a></td>
+                        <td><a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-outline-success">Thêm</a></td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -50,9 +50,9 @@
          
            
             <td>
-                <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                
-                <a class="btn btn-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+                 <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
+                 <a class="btn btn-outline-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
             </td>
                 </tr>
             }  
