@@ -4,7 +4,13 @@
     Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
 }
 
-<h1>Điểm danh thành viên khóa học</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">khóa học</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Điểm danh</li>
+    </ol>
+</nav>
 
 <div class="table-responsive">
    
@@ -51,7 +57,7 @@
                 <td>Rỗng</td>
             </tr>
         }
-       <a class="btn btn-success" href="/CourseLecturers/index">Trở về</a>
+            <a class="btn btn-outline-primary" href="/CourseLecturers/index">Trở về</a>
 
 
       <!-- More rows -->

@@ -51,21 +51,35 @@ namespace QuanLySinhVien.Controllers.Lecturers
         public IActionResult Create(Course model)
         {
 
+           
+            var ListCourse = _context.Courses.Where(x => x.Title == model.Title).ToList();
+           
+                if (ModelState.IsValid)
+                {
+                    if(ListCourse != null)
+                    {
+                        ModelState.AddModelError("Title", "Tên đã tồn tại.");
+                        ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
+                        ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
+                        return View(model);
+                      }
 
-            if (ModelState.IsValid)
-            {
-                model.Alias = Helpper.Utilities.SEOUrl(model.Title);
 
-                var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+                    model.Alias = Helpper.Utilities.SEOUrl(model.Title);
 
-                int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
+                        var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
-                model.AccountId = IdAccount; //luu bien vua ep vao thuoc tinh creator
+                        int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
 
-                _context.Courses.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                        model.AccountId = IdAccount; //luu bien vua ep vao thuoc tinh creator
+
+                        _context.Courses.Add(model);
+                        _context.SaveChanges();
+                        return RedirectToAction("Index");
+                }
+
+            
+
 
             ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
             ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");

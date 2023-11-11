@@ -31,7 +31,7 @@
 
     </header>
     <div>
-        <main style="height:1000px" role="main" class="pb-3">
+        <main role="main" class="pb-3" style="min-height:900px">
 
             
             @await Component.InvokeAsync("MenuLecturers")
@@ -46,28 +46,31 @@
 
         </main>
     </div>
+    <footer class="bg-white text-dark mt-5">
+        <hr />
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Học tập trực tuyến</p>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <a href="#">Elearing</a> | <a href="#">0344803674</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <footer class="border-top footer text-muted">
+@*     <footer class="border-top footer text-muted">
         <div class="container">
 
 
             <div class="footer-copyright text-center py-3">
-                © 2023 Copyright: Lebaby26
-               @*  @if (ViewData["AccountId"] == null)
-                {
+                © 2023 Copyright: Le26
 
-                    <a href="dang-nhap.html">Admin</a>
-                }
-                else
-                {
-
-                    <a href="admin.html">Admin</a>
-                } *@
             </div>
         </div>
 
-    </footer>
-    
+    </footer> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     
 

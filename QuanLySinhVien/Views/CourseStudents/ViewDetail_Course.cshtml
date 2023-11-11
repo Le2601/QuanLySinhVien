@@ -10,7 +10,15 @@
  
 
 @*PARTIAL VIEW CourseContents*@
-<h1>@ViewBag.TitleCourse - @ViewBag.NameGv</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">khóa học</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.TitleCourse - @ViewBag.NameGv</li>
+    </ol>
+</nav>
+
 <a class="btn btn-outline-info" href="/Member_Course/@ViewBag.IdCourse">Xem thành viên</a>
 <br />
 @await Html.PartialAsync("_PartialCourseContents",IsCourseContents)

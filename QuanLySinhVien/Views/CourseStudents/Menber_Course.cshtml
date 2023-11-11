@@ -4,7 +4,13 @@
     Layout = "~/Views/Shared/_LayoutStudent.cshtml";
 }
 
-<h1>Danh sách thành viên khóa học</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">khóa học</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Danh sách thành viên khóa học</li>
+    </ol>
+</nav>
 <a class="btn btn-outline-info" href="@ViewBag.UrlCourse">Trở về khóa học</a>
 <div class="table-responsive">
     <table class="table">
