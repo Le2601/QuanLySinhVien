@@ -178,6 +178,10 @@ namespace QuanLySinhVien.Controllers.Students
 
             var iCourse = _context.Courses.Where(x=> x.Id == id).FirstOrDefault();
 
+            var item = _context.Courses.Where(x => x.Id == id).FirstOrDefault();
+
+            ViewBag.TitleCourse = item.Alias;
+
             ViewBag.UrlCourse = "/details/" + iCourse.Alias + "-" + iCourse.Id;
 
             return View(items);
