@@ -161,7 +161,14 @@ namespace QuanLySinhVien.Controllers.Students
 
             ViewBag.GetIdAccount = get_Account.Code;
 
-            
+
+            //lay ten hien thi breadcrumb
+
+            var getCourseContentFirst = _context.CourseContents.Where(x=> x.Id == id).FirstOrDefault();
+
+            var getCourse = _context.Courses.Where(x=> x.Id == getCourseContentFirst.CourseId).FirstOrDefault();
+
+            ViewBag.getAliasCourse = getCourse.Alias;
 
 
 
