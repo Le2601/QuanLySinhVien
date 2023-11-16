@@ -58,9 +58,9 @@ namespace QuanLySinhVien.Controllers.Lecturers
                     Account kh = _context.Account.Include(a => a.Role)
                         .SingleOrDefault(a => a.Email.ToLower() == model.Email.ToLower().Trim());
 
-                    if (kh == null)
+                    if (kh.Email == null)
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "Thông tin không thể thiếu";
                         return View(model);
                     }
 
@@ -68,29 +68,31 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
                     if (kh.Password.Trim() != pass)
                     {
-                        ViewBag.Error = "Thong tin dang nhap chua chinh xac";
+                        ViewBag.Error = "Mật khẩu không đúng";
                         return View(model);
                     }
 
 
-                    //dang nhap thanh cong
+                    if (kh.RoleId == 4)
+                    {
+                        //dang nhap thanh cong
 
-                    //ghi nhan tg dang nhap
-                    kh.LastLogin = DateTime.Now;
-                    _context.Update(kh);
-                    await _context.SaveChangesAsync();
+                        //ghi nhan tg dang nhap
+                        kh.LastLogin = DateTime.Now;
+                        _context.Update(kh);
+                        await _context.SaveChangesAsync();
 
-                    var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+                        var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
-                    //identity
+                        //identity
 
-                    //luu session makh
+                        //luu session makh
 
-                    HttpContext.Session.SetString("AccountId_Lecturers", kh.Id.ToString());
+                        HttpContext.Session.SetString("AccountId_Lecturers", kh.Id.ToString());
 
-                    //edentity
+                        //edentity
 
-                    var userClaims = new List<Claim>
+                        var userClaims = new List<Claim>
                     {
 
                         new Claim(ClaimTypes.Name, kh.FullName),
@@ -102,14 +104,20 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
                     };
 
-                    var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
-                    var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
-                    await HttpContext.SignInAsync(userPrincipal);
+                        var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                        var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
+                        await HttpContext.SignInAsync(userPrincipal);
 
 
 
-                    return RedirectToAction("Index", "HomeLecturers");
+                        return RedirectToAction("Index", "HomeLecturers");
 
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Tài khoản giảng viên không tồn tại";
+                        return View(model);
+                    }
 
 
                 }

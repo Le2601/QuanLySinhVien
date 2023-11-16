@@ -112,6 +112,11 @@ namespace QuanLySinhVien.Controllers.Students
 
                         return RedirectToAction("Index", "HomeStudent");
                     }
+                    else
+                    {
+                        ViewBag.Error = "Tài khoản sinh viên không tồn tại";
+                        return View(model);
+                    }
 
 
 
