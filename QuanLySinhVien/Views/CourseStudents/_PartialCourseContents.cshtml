@@ -23,12 +23,10 @@
                                 <a href="/thuc-hanh/@item.Id" class="CourseFiles" data-id="@item.Id">Xem nội dung thực hành</a>
                             }
                             else
-                            {
-                             
-                       
+                            {                               
                                 if(item.Data == null)
                                 {
-                                 <p>@Html.Raw(item.Content)</p>
+                                <a href="#">@Html.Raw(item.Content)</a>
                                 }
                                 else
                                 {
