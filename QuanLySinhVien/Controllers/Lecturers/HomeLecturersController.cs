@@ -28,5 +28,16 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
             return View();
         }
+
+        public IActionResult User_Info(int id)
+        {
+            var item = _context.Account.Where(x => x.Id == id).FirstOrDefault();
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return View(item);
+        }
     }
 }

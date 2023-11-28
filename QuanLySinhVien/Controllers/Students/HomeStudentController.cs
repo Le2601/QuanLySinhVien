@@ -87,8 +87,23 @@ namespace QuanLySinhVien.Controllers.Students
             return View(models);
 
         }
-        
 
-       
-    }
+
+        public async Task<IActionResult> UserInfo(int id)
+        {
+            var item = await _context.Account.Where(x=> x.Id == id).FirstOrDefaultAsync();
+
+            if(item == null)
+            {
+                return NotFound();
+            }
+
+            return View(item);
+
+        }
+
+
+
+
+	}
 }

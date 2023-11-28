@@ -15,9 +15,15 @@ namespace QuanLySinhVien.Controllers.Components
 
         public IViewComponentResult Invoke()
         {
-         
+            var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+
+            int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
+
+            ViewBag.IdAccount = IdAccount;
             return View();
         }
+
+        
 
     }
 }

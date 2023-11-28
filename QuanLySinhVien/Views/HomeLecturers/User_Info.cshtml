@@ -1,0 +1,38 @@
+﻿@model QuanLySinhVien.Models.Account
+@{
+    ViewData["Title"] = "User_Info";
+    Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
+    </ol>
+</nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Thông tin người dùng -->
+
+            <img style="height:300px; width:250px" src="~/images/anh-avatar-vo-danh-doc-dao-768x767.jpg" />
+
+
+        </div>
+
+        <div class="col-md-8">
+            <!-- Nội dung chi tiết -->
+            <div class="card-body">
+                <p class="card-text">Tên: @Model.FullName</p>
+                <p class="card-text">MSGV: @Model.Code</p>
+                <p class="card-text">Email: @Model.Email</p>
+                <p class="card-text">Điện thoại: @Model.Phone</p>
+                <p class="card-text">Đăng nhập lần cuối: @Model.LastLogin</p>
+                <a href="#" class="btn btn-primary">Chỉnh sửa thông tin</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -29,7 +29,7 @@ namespace QuanLySinhVien.Controllers.Components
 
             int IdAccount = int.Parse(loginAdmin);
 
-
+            ViewBag.IdAccount = IdAccount;
 
            var item = _context.Account.Where(x=> x.Id == IdAccount).FirstOrDefault();
 
