@@ -28,7 +28,7 @@ namespace QuanLySinhVien.Controllers.Students
         {
             _context = context;
             _environment = environment;
-        }
+        }   
         public IActionResult Index()
         {
             return View();
@@ -194,7 +194,13 @@ namespace QuanLySinhVien.Controllers.Students
             return View(items);
         }
 
-        
+
+
+
+
+
+
+
 
 
     }

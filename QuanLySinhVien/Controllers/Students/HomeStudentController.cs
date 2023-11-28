@@ -50,6 +50,7 @@ namespace QuanLySinhVien.Controllers.Students
 
             ViewBag.CreateAccount = new SelectList(_context.Account.ToList(), "Id", "Title");
 
+           
             return View(models);
         }
       
@@ -68,6 +69,13 @@ namespace QuanLySinhVien.Controllers.Students
 
             var pageNumber = page == null || page <= 0 ? 1 : page.Value;
             var pageSize = 3;
+
+
+            HttpContext.Session.SetString("GetValueSearch", valueCourses);
+          
+
+            ViewBag.GetValueSearch = HttpContext.Session.GetString("GetValueSearch");
+
 
             var items =  _context.Courses.Where(x => x.Title.Contains(valueCourses)).OrderBy(x => x.Id);
 

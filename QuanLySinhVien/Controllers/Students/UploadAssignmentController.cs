@@ -41,7 +41,7 @@ namespace QuanLySinhVien.Controllers.Students
             {
                 // Kiểm tra định dạng của tệp tin
                 var fileExtension = Path.GetExtension(file.FileName).ToLower();
-                if (fileExtension != ".zip" && fileExtension != ".docx" && fileExtension != ".rar")
+                if (fileExtension != ".zip" && fileExtension != ".docx" && fileExtension != ".rar" && fileExtension != ".png")
                 {
                     return BadRequest("Invalid file format");
                 }

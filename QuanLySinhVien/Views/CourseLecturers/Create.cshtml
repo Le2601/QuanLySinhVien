@@ -3,6 +3,9 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
 }
+
+
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -10,6 +13,8 @@
        
     </ol>
 </nav>
+
+
 <!-- Main content -->
 <div class="container" >
     <section class="content">
@@ -83,14 +88,16 @@
                                         </div>
 
 
-
+                                        
+                                       
 
 
 
 
                                     </div>
 
-
+                                    @* <form action="/CourseContentLecturers/UploadFilesCourseContent/123" class="dropzone" id="my-dropzone">
+                                    </form> *@
                                 </div>
 
                                 <!-- /.tab-content -->
@@ -100,8 +107,12 @@
                             </div>
                         </div>
 
+
+
+
                     </form>
 
+                    
 
 
                 </div>
@@ -118,15 +129,26 @@
 </div>
 
 
+@* @section Scripts{
 
-@section scripts{
-
-  
+    <script>
+        Dropzone.options.myDropzone = {
+            init: function () {
+                this.on("complete", function (file) {
+                    console.log(file.name + " uploaded");
+                });
+            },
+            sending: function (file, xhr, formData) {
+                formData.append("additionalData", "Additional data goes here");
+            }
+        };
+    </script>
 
 
    
 
-}
+
+} *@
 
 
 
