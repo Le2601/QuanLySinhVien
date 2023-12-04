@@ -48,6 +48,12 @@ namespace QuanLySinhVien.Controllers.Students
         [Route("login-student.html", Name = "Login-student")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+
+            if (model.Password.Length <= 5 )
+            {
+                ViewBag.Error = "Mật khẩu phải hơn 6 ký tự";
+                return View(model);
+            }
             try
             {
               
@@ -65,6 +71,9 @@ namespace QuanLySinhVien.Controllers.Students
                         ViewBag.Error = "tài khoản không tồn tại";
                         return View(model);
                     }
+
+                   
+
                     string pass = (model.Password.Trim()).ToMD5();
 
                     if (kh.Password.Trim() != pass)

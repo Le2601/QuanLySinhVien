@@ -51,6 +51,11 @@ namespace QuanLySinhVien.Controllers.Lecturers
         [Route("login-giangvien.html", Name = "Login-giangvien")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            if (model.Password.Length <= 5)
+            {
+                ViewBag.Error = "Mật khẩu phải hơn 6 ký tự";
+                return View(model);
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -61,6 +66,11 @@ namespace QuanLySinhVien.Controllers.Lecturers
                     if (kh.Email == null)
                     {
                         ViewBag.Error = "Thông tin không thể thiếu";
+                        return View(model);
+                    }
+                    if (kh == null)
+                    {
+                        ViewBag.Error = "tài khoản không tồn tại";
                         return View(model);
                     }
 

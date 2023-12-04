@@ -199,6 +199,11 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         [Route("dang-nhap.html", Name = "Login")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
+            if (model.Password.Length <= 5)
+            {
+                ViewBag.Error = "Mật khẩu phải hơn 6 ký tự";
+                return View(model);
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -220,24 +225,26 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
                     }
                     
 
-                    //dang nhap thanh cong
+                   if(kh.RoleId == 3)
+                    {
+                        //dang nhap thanh cong
 
-                    //ghi nhan tg dang nhap
-                    kh.LastLogin = DateTime.Now;
-                    _context.Update(kh);
-                    await _context.SaveChangesAsync();
+                        //ghi nhan tg dang nhap
+                        kh.LastLogin = DateTime.Now;
+                        _context.Update(kh);
+                        await _context.SaveChangesAsync();
 
-                    var taikhoan = HttpContext.Session.GetString("AccountId");
+                        var taikhoan = HttpContext.Session.GetString("AccountId");
 
-                    //identity
+                        //identity
 
-                    //luu session makh
+                        //luu session makh
 
-                    HttpContext.Session.SetString("AccountId", kh.Id.ToString());
+                        HttpContext.Session.SetString("AccountId", kh.Id.ToString());
 
-                    //edentity
+                        //edentity
 
-                    var userClaims = new List<Claim>
+                        var userClaims = new List<Claim>
                     {
 
                         new Claim(ClaimTypes.Name, kh.FullName),
@@ -249,13 +256,19 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
                     };
 
-                    var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
-                    var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
-                    await HttpContext.SignInAsync(userPrincipal);
+                        var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                        var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
+                        await HttpContext.SignInAsync(userPrincipal);
 
 
 
-                    return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                        return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                    }
+                    else
+                    {
+                        ViewBag.Error = "Tài khoản giảng viên không tồn tại";
+                        return View(model);
+                    }
 
 
 
