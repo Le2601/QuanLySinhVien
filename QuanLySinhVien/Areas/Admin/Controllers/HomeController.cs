@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using QuanLySinhVien.Models;
 using Microsoft.AspNetCore.Http;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PagedList.Core;
+using Microsoft.AspNetCore.Hosting;
+using QuanLySinhVien.DI.Courses;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -14,15 +18,20 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
+        private readonly ICourseRepository _CourseRepository;
         private readonly ElearingDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-
-
-        public HomeController(ElearingDbContext context)
+        public HomeController(ElearingDbContext context, ICourseRepository courseRepository, IWebHostEnvironment environment)
         {
+            _CourseRepository = courseRepository;
             _context = context;
 
+            _environment = environment;
+
+
         }
+
 
         [Route("admin.html", Name = "AdminHome")]
         public IActionResult Index()
@@ -37,5 +46,37 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
             return View();
         }
+
+        public IActionResult Search(string valueSearch, int? page)
+
+        {
+
+            
+
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 3;
+
+            ViewBag.department = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
+            ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+
+
+            ViewBag.AccountName = new SelectList(_CourseRepository.GetAllCreator(), "Id", "Title");
+
+            HttpContext.Session.SetString("GetValueSearchAdmin", valueSearch);
+
+
+            ViewBag.GetValueSearch = HttpContext.Session.GetString("GetValueSearchAdmin");
+
+
+            var items = _context.Courses.Where(x => x.Title.Contains(valueSearch)).OrderBy(x => x.Id);
+
+            PagedList<Course> models = new PagedList<Course>(items, pageNumber, pageSize);
+
+          
+
+            return View(models);
+
+        }
+
     }
 }

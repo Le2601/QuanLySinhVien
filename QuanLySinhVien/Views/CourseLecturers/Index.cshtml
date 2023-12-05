@@ -1,5 +1,6 @@
-﻿@model IEnumerable<QuanLySinhVien.Models.Course>
-
+﻿@using PagedList.Core.Mvc
+@using System.Globalization;
+@model PagedList.Core.IPagedList<QuanLySinhVien.Models.Course>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
@@ -70,8 +71,17 @@
             </tr>
         }
 
+
+
     </tbody>
 </table>
+    @*  note *@
+    <div aria-label="Page navigation example">
+        <ul class="pagination">
+            <pager class="pager-container" list="@Model" asp-controller="CourseLecturers" asp-action="Index" />
+        </ul>
+    </div>
+    @*  note *@
 </div>
 
 

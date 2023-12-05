@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PagedList.Core;
 using QuanLySinhVien.Models;
 using System;
 using System.Collections.Generic;
@@ -31,21 +32,24 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
 
         //[Route("CourseLecturers.html", Name = "Course-giangvien")]
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
 
             var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
             int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
 
+           
 
             ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
 
-            var items = _context.Courses.Where(x => x.AccountId == IdAccount).ToList();
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 6;
+            var items = _context.Courses.Where(x => x.AccountId == IdAccount);
 
+            PagedList<Course> models = new PagedList<Course>(items, pageNumber, pageSize);
 
-
-            return View(items);
+            return View(models);
         }
         public IActionResult Create()
         {

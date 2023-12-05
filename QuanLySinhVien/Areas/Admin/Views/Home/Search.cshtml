@@ -1,10 +1,10 @@
-﻿@using PagedList.Core.Mvc
-@using System.Globalization;
+﻿@using System.Globalization;
 @model PagedList.Core.IPagedList<QuanLySinhVien.Models.Course>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Search";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 
 @section naviheader{
     <!-- Left navbar links -->
@@ -29,8 +29,21 @@
             <div class="col-sm-6">
                 <h1>Quản lý danh mục</h1>
             </div>
-            
-            <div class="col-sm-6">
+            <div class="col-sm-3">
+                <form class="input-group input-group-sm" action="/admin/Home/Search" method="get">
+                    <!-- Icon -->
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                    <!-- Input -->
+                    <input type="text" class="form-control" name="valueSearch" placeholder="Search...">
+                    <!-- Button (optional) -->
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Search</button>
+                    </span>
+                </form>
+            </div>
+            <div class="col-sm-3">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Khóa học</li>
@@ -48,7 +61,7 @@
         <div class="card-header">
             <h3 class="card-title">Danh sách danh mục</h3>
 
-           
+
             <div class="card-tools">
                 <a href="/admin/Course/Create" class="btn btn-danger">Thêm mới</a>
             </div>
@@ -68,9 +81,9 @@
                         <th>Học kỳ</th>
 
 
-                            
+
                         <th>Ngày tạo</th>
-                      
+
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -87,16 +100,16 @@
                                 <td>@tong</td>
 
                                 <td>@item.Account.FullName</td>
-                              
+
                                 <td>@item.Title</td>
 
                                 <td>@item.department.Title</td>
-                                 <td>@item.SemesterCourse.Title</td>
+                                <td>@item.SemesterCourse.Title</td>
 
-                               
+
 
                                 <td>@item.DateStart</td>
-                              
+
                                 <td>
                                     <a class="btn btn-danger" href="/admin/Course/Update/@item.Id">Edit</a>
                                     <a class="btn btn-outline-primary btnDelete" data-id="@item.Id" href="#">Delete</a>
@@ -105,7 +118,7 @@
                         }
                     }
 
-                    
+
 
 
                     else
@@ -120,16 +133,16 @@
 
 
             </table>
-          
+
 
         </div>
-          @*  note *@
-            <div aria-label="Page navigation example">
-                <ul class="pagination">
-                    <pager class="pager-container" list="@Model" asp-controller="Course" asp-action="Index" asp-area="Admin" />
-                </ul>
-            </div>
-            @*  note *@
+        @*  note *@
+        <div aria-label="Page navigation example">
+            <ul class="pagination">
+                <pager class="pager-container" list="@Model" asp-controller="Course" asp-action="Index" asp-area="Admin" />
+            </ul>
+        </div>
+        @*  note *@
         <!-- /.card-body -->
         <!-- /.card-footer-->
     </div>
@@ -155,26 +168,25 @@
 
 
 <!-- /.content -->
-
 @section scripts{
 
     <script>
-        $(document).ready(function(){
-            $('body').on('click','.btnDelete',function(){
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data('id');
 
                 var conf = confirm("ban muoon xoa chua");
 
-                if(conf == true){
+                if (conf == true) {
 
                     $.ajax({
 
                         url: '/admin/Course/delete',
                         type: 'post',
-                        data: {id:id},
-                        success: function(rs){
-                            if(rs.success){
-                                $('trow_'+id).remove();
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('trow_' + id).remove();
                                 location.reload();
                             }
                         }
@@ -187,9 +199,8 @@
             });
         });
     </script>
-  
+
 
 }
-
 
 

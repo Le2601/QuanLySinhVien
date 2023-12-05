@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Drawing2D;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using PagedList.Core;
+using System.Linq;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -23,13 +26,13 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository _CourseRepository;
-
+        private readonly ElearingDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
-        public CourseController(ICourseRepository courseRepository, IWebHostEnvironment environment)
+        public CourseController(ElearingDbContext context, ICourseRepository courseRepository, IWebHostEnvironment environment)
         {
             _CourseRepository = courseRepository;
-
+            _context = context;
 
             _environment = environment;
 
@@ -40,9 +43,9 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
 
 
-        public async Task<ActionResult<IEnumerable<Course>>> Index()
+        public async Task<ActionResult<IEnumerable<Course>>> Index(int? page)
         {
-            var items = await _CourseRepository.GetCourses();
+            var items =  _context.Courses.OrderBy(x=> x.Id);
 
             ViewBag.department = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
             ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
@@ -51,7 +54,14 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             ViewBag.AccountName = new SelectList(_CourseRepository.GetAllCreator(), "Id", "Title");
 
 
-            return View(items);
+
+            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+            var pageSize = 6;
+            
+
+            PagedList<Course> models = new PagedList<Course>(items, pageNumber, pageSize);
+
+            return View(models);
         }
 
 

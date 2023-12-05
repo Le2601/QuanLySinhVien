@@ -25,8 +25,10 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
         public IActionResult Index()
         {
+            var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
+            int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
 
-            return View();
+            return RedirectToAction("User_Info", new { id = IdAccount });
         }
 
         public IActionResult User_Info(int id)
