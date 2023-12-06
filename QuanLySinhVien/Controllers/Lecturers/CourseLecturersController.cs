@@ -141,6 +141,16 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
             var item = _context.Courses.Find(id);
 
+            //kiem tra neu khoa da ton tai khoa hoc
+
+            var CheckCourse = _context.CourseContents.Where(x => x.CourseId == id).ToList();
+
+            if (CheckCourse.Count >= 1)
+            {
+                return Json(new { success = false, msg = "Tồn tại khóa ngoại không thể xóa" });
+            }
+
+
             if (ModelState.IsValid)
             {
 

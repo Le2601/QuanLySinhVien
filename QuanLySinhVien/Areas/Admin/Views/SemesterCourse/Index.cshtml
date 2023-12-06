@@ -130,8 +130,12 @@
                         type: 'post',
                         data: {id:id},
                         success: function(rs){
-                            if(rs.success){
-                                $('trow_'+id).remove();
+                            if (rs.success) {
+                                $('trow_' + id).remove();
+                                location.reload();
+                            }
+                            else {
+                                alert(rs.msg);
                                 location.reload();
                             }
                         }

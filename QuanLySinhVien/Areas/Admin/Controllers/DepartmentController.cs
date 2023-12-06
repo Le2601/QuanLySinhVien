@@ -17,9 +17,10 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentsRepository _departmentsRepository;
-
-        public DepartmentController(IDepartmentsRepository departmentsRepository)
+        private readonly ElearingDbContext _context;
+        public DepartmentController(ElearingDbContext context,IDepartmentsRepository departmentsRepository)
         {
+            _context = context;
             _departmentsRepository = departmentsRepository;
         }
 
@@ -83,15 +84,25 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         {
             var item =await _departmentsRepository.GetDepartment(id);
 
+            //kiem tra neu khoa da ton tai khoa hoc
+
+            var CheckCourse = _context.Courses.Where(x => x.DepartmentId == id).ToList();
+
+            if( CheckCourse.Count >= 1) 
+            {
+                return Json(new { success = false,msg = "Tồn tại khóa ngoại không thể xóa" });
+            }
+
+
             if(item != null)
             {
                await _departmentsRepository.Delete(item);
 
-                return Json(new { success = true });
+                return Json(new { success = true, msg = "Xóa thành công" });
 
             }
 
-            return Json(new { success = false });
+            return Json(new { success = false, msg = "Không tồn tại" });
         }
     }
 }

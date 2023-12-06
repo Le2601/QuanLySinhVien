@@ -176,6 +176,17 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
             Course course =await _CourseRepository.GetCourse(id);
 
+            //kiem tra neu khoa da ton tai khoa hoc
+
+            var CheckCourseContent = _context.CourseContents.Where(x => x.CourseId == id).ToList();
+            var CheckCourseMember = _context.CourseMembers.Where(x => x.CourseId == id).ToList();
+
+            if (CheckCourseContent.Count >= 1 || CheckCourseMember.Count >= 1)
+            {
+                return Json(new { success = false, msg = "Tồn tại khóa ngoại không thể xóa" });
+            }
+
+
 
             if (course != null)
             {

@@ -102,12 +102,15 @@
                         type: 'post',
                         data: {id:id},
                         success: function(rs){
-                            if(rs.success){
+                            if (rs.success) {
 
-                                $('trow_'+id).remove();
+                                $('trow_' + id).remove();
 
                                 location.reload();
 
+                            }
+                            else {
+                                alert(rs.msg);
                             }
                         }
 

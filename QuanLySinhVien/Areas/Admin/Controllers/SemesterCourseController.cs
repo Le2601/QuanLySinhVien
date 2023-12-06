@@ -11,6 +11,7 @@ using QuanLySinhVien.DI.Departments;
 using QuanLySinhVien.DI.Roles;
 using QuanLySinhVien.DI.SemesterCourses;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -20,9 +21,10 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
     {
 
         private readonly ISemesterCoursesRepository _semesterCoursesRepository;
-
-        public SemesterCourseController(ISemesterCoursesRepository semesterCoursesRepository)
+        private readonly ElearingDbContext _context;
+        public SemesterCourseController(ElearingDbContext context, ISemesterCoursesRepository semesterCoursesRepository)
         {
+            _context = context;
             _semesterCoursesRepository = semesterCoursesRepository;
         }
 
@@ -85,7 +87,14 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         {
 
             var item = await _semesterCoursesRepository.GetSemesterCourse(id);
+            //kiem tra neu khoa da ton tai khoa hoc
 
+            var CheckCourse = _context.Courses.Where(x => x.SemesterCourseId == id).ToList();
+
+            if (CheckCourse.Count >= 1)
+            {
+                return Json(new { success = false, msg = "Tồn tại khóa ngoại không thể xóa" });
+            }
             if (item != null)
             {
                  await _semesterCoursesRepository.Delete(item);
