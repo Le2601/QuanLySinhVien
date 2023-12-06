@@ -71,6 +71,8 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
 
             ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
+
+           
             return View();
         }
 
@@ -78,8 +80,19 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Course model)
         {
 
+
+            ViewBag.department = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
+            ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+
+            ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
+            if (model.DepartmentId == 0)
+            {
+                ModelState.AddModelError("DepartmentId", "Vui lòng chọn khoa học");
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
+               
 
 
                 model.Alias = Helpper.Utilities.SEOUrl(model.Title);
@@ -94,15 +107,16 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
                 model.AccountId = IdCreate; //luu bien vua ep vao thuoc tinh creator
 
-         
-
-                ////lay id cua nguoi tao 
-
-                //var GetNameCreator = _CourseRepository.GetNameCreator(IdCreate);
 
 
+                ////hien thong bao loi cac selectlist neu null
+                //ModelState.AddModelError("DepartmentId", "Vui lòng chọn khoa học");
+                //ModelState.AddModelError("SemesterCourseId", "Vui lòng chọn năm học");
+                //ModelState.AddModelError("AccountId", "Giảng viên phu trách không thể để trống");
 
-                
+
+
+
 
 
 
@@ -138,6 +152,11 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Course model)
         {
+            ViewBag.DepartmentId = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
+            ViewBag.SemesterCourseId = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+
+            ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
+
             if (ModelState.IsValid)
             {
                model.Alias = Helpper.Utilities.SEOUrl(model.Title);

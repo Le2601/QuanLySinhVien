@@ -14,7 +14,7 @@
             <a href="/admin/home" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/Course" class="nav-link">Khóa học</a>
+            <a href="/admin/Course" class="nav-link">Khoa</a>
         </li>
     </ul>
 }
@@ -25,12 +25,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý danh mục</h1>
+                <h1>Quản lý khoa</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Khóa học</li>
+                    <li class="breadcrumb-item active">Khoa</li>
                 </ol>
             </div>
         </div>
@@ -43,7 +43,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục</h3>
+            <h3 class="card-title">Danh sách khoa</h3>
 
             <div class="card-tools">
                 <a href="/admin/Department/Create" class="btn btn-danger">Thêm mới</a>
@@ -55,7 +55,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+               Tiêu đề
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Alias)

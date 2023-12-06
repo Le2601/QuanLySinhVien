@@ -43,12 +43,16 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             {
                 model.Alias = QuanLySinhVien.Helpper.Utilities.SEOUrl(model.Title);
                 var CreateDepartment = await _departmentsRepository.CreateDepartment(model);
+
+                return RedirectToAction("index");
             }
+
+            return View(model);
                
 
                 
 
-                return RedirectToAction("index");
+                
 
         
         }
@@ -64,10 +68,14 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(department model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             model.Alias = QuanLySinhVien.Helpper.Utilities.SEOUrl(model.Title);
 
             var UpdateDepartment = await _departmentsRepository.UpdateDepartment(model);
-            
+
             return RedirectToAction("index");
         }
         [HttpPost]

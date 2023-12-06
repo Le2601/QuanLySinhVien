@@ -39,11 +39,15 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Role model)
 
         {
-            var CreateRole =await _RolesRepository.CreateRole(model);
-            
+           if (ModelState.IsValid)
+            {
+                var CreateRole = await _RolesRepository.CreateRole(model);
 
 
-            return RedirectToAction("index");
+
+                return RedirectToAction("index");
+            }
+            return View(model);
 
 
         }

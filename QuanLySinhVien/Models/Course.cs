@@ -29,7 +29,7 @@ namespace QuanLySinhVien.Models
         [Required(ErrorMessage = "Không thể bỏ trống")]
         public string Title { get; set; }
 
-        
+        [Required(ErrorMessage = "Không thể bỏ trống")]
         public int AccountId { get; set; }
 
         public string Alias { get; set; }
