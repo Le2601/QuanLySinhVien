@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="job-right my-4 flex-shrink-0">
-                                <a href="/AddToCourse/@item.Alias-@item.Id" class="btn d-block w-100 d-sm-inline-block btn-light " onclick="return confirm('Bạn muốn tham gia khóa học này?')">Apply now</a>
+                                <a  data-id="@item.Id" data-alias="@item.Alias" class="btn d-block w-100 d-sm-inline-block btn-light btnAddToCourse" onclick="return confirm('Bạn muốn tham gia khóa học này?')">Apply now</a>
 @*                                 <a data-id="@item.Id" data-alias="@item.Alias" class="btn d-block w-100 d-sm-inline-block btn-light btnAddToCourse Getvalue">Apply now</a>
  *@
                             </div>
@@ -62,7 +62,8 @@
 
             </div>
 
-          
+
+            
         </div>
     </div>
 
@@ -71,29 +72,37 @@
 @section Scripts{
 
     <script>
-        // $(document).ready(function () {
-        //     $('body').on('click', '.btnAddToCourse', function () {
-        //         var id = $(this).data('id');
-        //         var alias = $('.Getvalue').data('alias');
-
-        //         var conf = confirm("Bạn muốn tham gia khóa học này " + alias);
-
-               
-
-        //             $.ajax({
-
-        //                 url: '/CourseStudents/AddToCourse',
-        //                 type: 'get',
-        //                 data: {alias: alias, id: id },
-        //                 success: function (rs) {
-                           
-        //                 }
-
-        //             });
+        $(document).ready(function () {
+            $('body').on('click', '.btnAddToCourse', function () {
+                var id = $(this).data('id');
+                var alias = $(this).data('alias');
 
                 
-        //     });
-        // });
+
+                
+                    $.ajax({
+                        url: '/CourseStudents/AddToCourse',
+                        type: 'POST',
+                        data: { alias: alias, id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                alert(rs.msg);
+                                location.reload();
+                            }
+                            else {
+                                alert(rs.msg);
+                                location.reload();
+                            }
+                        }
+
+                    });
+
+                
+
+                   
+                
+            });
+        });
     </script>
 
 

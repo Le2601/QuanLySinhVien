@@ -20,13 +20,14 @@
                         <li class="list-group-item">
                             @if (item.IsUpload == true)
                             {
-                                <a href="/thuc-hanh/@item.Id" class="CourseFiles" data-id="@item.Id">Xem nội dung thực hành</a>
-                            }
-                            else
-                            {                               
-                                if(item.Data == null)
-                                {
-                                <a href="#">@Html.Raw(item.Content)</a>
+                        <a href="/thuc-hanh/@item.Id" class="CourseFiles" data-id="@item.Id">Xem nội dung thực hành</a>
+                    }
+                    else
+                    {                               
+                        if(item.Data == null)
+                        {
+                           
+                            <a href="~/#">@Html.Raw(item.Content)</a>
                                 }
                                 else
                                 {

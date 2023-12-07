@@ -39,8 +39,8 @@ namespace QuanLySinhVien.Controllers.Students
 
 
 
-        [Route("/AddToCourse/{alias}-{Id}", Name = "CourseStudentsAdd")]
-
+        //[Route("/AddToCourse/{alias}-{Id}", Name = "CourseStudentsAdd")]
+        [HttpPost]
         public IActionResult AddToCourse(string alias,int id)
         {
 
@@ -66,7 +66,7 @@ namespace QuanLySinhVien.Controllers.Students
             if (IStudent.Count == 1)
             {
 
-                return RedirectToAction("Index", "HomeStudent");
+                return Json(new { success = false, msg = "Bạn đã tham gia khóa học này rồi" });
 
 
 
@@ -88,7 +88,7 @@ namespace QuanLySinhVien.Controllers.Students
 
                 _context.CourseMembers.Add(AddDb);
                 _context.SaveChanges();
-                return View();
+                return Json(new { success = true, msg = "Tham gia thành công" });
             }
            
         }
