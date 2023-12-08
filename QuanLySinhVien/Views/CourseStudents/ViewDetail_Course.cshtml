@@ -18,7 +18,7 @@
         <li class="breadcrumb-item active" aria-current="page">@ViewBag.TitleCourse - @ViewBag.NameGv</li>
     </ol>
 </nav>
-
+<h3>@ViewBag.TitleCourse - @ViewBag.NameGv</h3>
 <a class="btn btn-outline-info" href="/Member_Course/@ViewBag.IdCourse">Xem thành viên</a>
 <br />
 @await Html.PartialAsync("_PartialCourseContents",IsCourseContents)
