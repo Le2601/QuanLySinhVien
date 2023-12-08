@@ -24,25 +24,25 @@
         {
             <hr />
 
-        <h2> <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id">@item.Title</a></h2>
+            <h2> <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id">@item.Title</a></h2>
 
-          
-        <h3>
-            @item.Description
-        </h3>
-   
-        <span>Ngày bắt đầu: @item.StartDate - Ngày kết thúc: @item.EndDate</span>
+
+            <h3>
+                @item.Description
+            </h3>
+
+            <span>Ngày bắt đầu: @item.StartDate - Ngày kết thúc: @item.EndDate</span>
             <br />
-           
+
             @foreach (var item_UploadAssignment in IsUploadAssignment)
             {
-               
-            if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.Mssv.Equals(ViewBag.GetIdAccount))
+
+                if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.Mssv.Equals(ViewBag.GetIdAccount))
                 {
 
-               
 
-                <div><div style="color:red">Đã nộp bài tập</div>Ngày nộp: @item_UploadAssignment.UpdateDay || <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a></div>
+
+                    <div><div style="color:red">Đã nộp bài tập</div>Ngày nộp: @item_UploadAssignment.UpdateDay || <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a></div>
 
                 }
 
@@ -57,6 +57,7 @@
 
         }
     }
+
 
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
