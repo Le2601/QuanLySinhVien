@@ -99,7 +99,7 @@ namespace QuanLySinhVien.DI.Courses
 
         public IEnumerable<Account> GetAllCreator()
         {
-            return _dbContext.Account.ToList();
+            return _dbContext.Account.Where(x=> x.RoleId ==4).ToList();
         }
 
         

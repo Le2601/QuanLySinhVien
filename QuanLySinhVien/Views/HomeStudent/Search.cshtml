@@ -9,13 +9,22 @@
 
 <link href="~/css/listcoursecdn.css" rel="stylesheet" />
 <link href="~/css/listcourse.css" rel="stylesheet" />
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">TÌm kiếm khóa học</a></li>
+        <li class="breadcrumb-item"><a href="#">@ViewBag.GetValueSearch</a></li>
+    </ol>
+</nav>
 <div class="class=" container-fluid"">
 
 
     <div class="row">
 
         <div class="col-lg-10 mx-auto">
-            <h1>Đã tìm thấy với kết quả với từ khóa "@ViewBag.GetValueSearch"</h1>
+            <h5>Đã tìm thấy @ViewBag.CountValueSearch với từ khóa "@ViewBag.GetValueSearch"</h5>
             <div class="career-search mb-60">
                 @*                 <h3 class="top-c-sep">Danh sách khóa học</h3>
                 *@
@@ -55,7 +64,7 @@
                 @*  note *@
                 <div aria-label="Page navigation example">
                     <ul class="pagination">
-                        <pager class="pager-container" list="@Model" asp-controller="HomeStudent" asp-action="Index" />
+                        <pager class="pager-container" list="@Model" asp-controller="HomeStudent" asp-action="Search" />
                     </ul>
                 </div>
                 @*  note *@

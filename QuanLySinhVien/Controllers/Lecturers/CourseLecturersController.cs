@@ -77,11 +77,22 @@ namespace QuanLySinhVien.Controllers.Lecturers
                       }
 
 
-                    model.Alias = Helpper.Utilities.SEOUrl(model.Title);
+                    
 
                         var taikhoan = HttpContext.Session.GetString("AccountId_Lecturers");
 
                         int IdAccount = Int32.Parse(taikhoan); //ep kieu string sang int
+
+                        // xử lý lưu tiêu đề  + tên giảng viên
+
+                        var GetNameGv = _context.Account.Where(x => x.Id == IdAccount).FirstOrDefault();
+
+                         var EditTitle = model.Title +"-"+  GetNameGv.FullName;
+
+                        model.Title = EditTitle;
+
+                        model.Alias = Helpper.Utilities.SEOUrl(EditTitle);
+
 
                         model.AccountId = IdAccount; //luu bien vua ep vao thuoc tinh creator
 

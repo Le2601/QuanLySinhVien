@@ -92,20 +92,31 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-               
+                model.AccountId = model.AccountId;
+
+                var GetNameGv = _context.Account.Where(x => x.Id == model.AccountId).FirstOrDefault();
+
+                // xử lý lưu tiêu đề  + tên giảng viên
 
 
-                model.Alias = Helpper.Utilities.SEOUrl(model.Title);
+
+                var EditTitle = model.Title + "-" + GetNameGv.FullName;
+
+                model.Title = EditTitle;
+
+                model.Alias = Helpper.Utilities.SEOUrl(EditTitle);
+
+                //model.Alias = Helpper.Utilities.SEOUrl(model.Title);
 
                 //lay session vao trang admin
 
-                string loginAdmin = HttpContext.Session.GetString("AccountId");
+                //string loginAdmin = HttpContext.Session.GetString("AccountId");
 
-                ViewData["AccountId"] = loginAdmin;       
+                //ViewData["AccountId"] = loginAdmin;       
 
-                int IdCreate = Int32.Parse(loginAdmin); //ep kieu string sang int
+                //int IdCreate = Int32.Parse(loginAdmin); //ep kieu string sang int
 
-                model.AccountId = IdCreate; //luu bien vua ep vao thuoc tinh creator
+                //model.AccountId = IdCreate; //luu bien vua ep vao thuoc tinh creator
 
 
 
