@@ -1,0 +1,30 @@
+﻿.assignment-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.status-btn {
+    padding: 8px;
+    background-color: #28a745; /* Màu xanh lá cây - có thể điều chỉnh tùy ý */
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.submission-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333; /* Màu chữ có thể điều chỉnh tùy ý */
+}
+
+    .submission-info a {
+        margin-left: 10px;
+        color: #007bff; /* Màu chữ cho liên kết có thể điều chỉnh tùy ý */
+        text-decoration: none;
+    }
+
+        .submission-info a:hover {
+            text-decoration: underline;
+        }

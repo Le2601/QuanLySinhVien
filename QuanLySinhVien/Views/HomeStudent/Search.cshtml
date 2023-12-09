@@ -1,5 +1,4 @@
-﻿@using System.Globalization;
-@model PagedList.Core.IPagedList<QuanLySinhVien.Models.Course>
+﻿@model IEnumerable<QuanLySinhVien.Models.Course>
 @{
     ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_LayoutStudent.cshtml";
@@ -18,13 +17,13 @@
         <li class="breadcrumb-item"><a href="#">@ViewBag.GetValueSearch</a></li>
     </ol>
 </nav>
-<div class="class=" container-fluid"">
+<div class="container-fluid">
 
 
-    <div class="row">
+    <div class="row" style="min-height:600px">
 
         <div class="col-lg-10 mx-auto">
-            <h5>Đã tìm thấy @ViewBag.CountValueSearch với từ khóa "@ViewBag.GetValueSearch"</h5>
+            <h5>Đã tìm thấy @ViewBag.CountValueSearch kết quả với từ khóa "@ViewBag.GetValueSearch"</h5>
             <div class="career-search mb-60">
                 @*                 <h3 class="top-c-sep">Danh sách khóa học</h3>
                 *@
@@ -61,13 +60,7 @@
 
                 </div>
 
-                @*  note *@
-                <div aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <pager class="pager-container" list="@Model" asp-controller="HomeStudent" asp-action="Search" />
-                    </ul>
-                </div>
-                @*  note *@
+               
 
             </div>
 
@@ -76,4 +69,8 @@
     </div>
 
 </div>
+
+<br />
+<br />
+
 

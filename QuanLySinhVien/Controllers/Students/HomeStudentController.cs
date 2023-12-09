@@ -79,9 +79,9 @@ namespace QuanLySinhVien.Controllers.Students
             ViewBag.GetValueSearch = HttpContext.Session.GetString("GetValueSearch");
 
 
-            var items =  _context.Courses.Where(x => x.Title.Contains(valueCourses)).OrderBy(x => x.Id);
+            var items =  _context.Courses.Where(x => x.Title.Contains(valueCourses)).OrderBy(x => x.Id).ToList();
 
-            PagedList<Course> models =  new PagedList<Course>(items, pageNumber, pageSize);
+           
 
             //var items = await  _context.Courses.Where(x => x.Title.Contains(valueCourses)).ToListAsync();
             ViewBag.CreateAccount = new SelectList(_context.Account.ToList(), "Id", "Title");
@@ -90,7 +90,7 @@ namespace QuanLySinhVien.Controllers.Students
             var CountValueSearch = _context.Courses.Where(x => x.Title.Contains(valueCourses)).OrderBy(x => x.Id).ToList();
             ViewBag.CountValueSearch = CountValueSearch.Count;
 
-            return View(models);
+            return View(items);
 
         }
 

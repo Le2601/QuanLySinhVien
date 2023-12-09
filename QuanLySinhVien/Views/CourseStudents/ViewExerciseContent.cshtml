@@ -7,6 +7,8 @@
     List<UploadAssignment> IsUploadAssignment = ViewBag.UploadAssignment;
 }
 
+<link href="~/user/css/student.css" rel="stylesheet" />
+
 @*   dropzone*@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.css" />
 
@@ -17,19 +19,24 @@
         <li class="breadcrumb-item active" aria-current="page">Bài tập thực hành</li>
     </ol>
 </nav>
+<div class="container-fluid">
 
+
+    <div class="row" style="min-height:600px">
+
+        <div class="col-lg-10 mx-auto">
     @if (Model != null && Model.Count() > 0)
     {
         foreach (var item in Model)
         {
             <hr />
 
-            <h2> <a href="/chi-tiet-thuc-hanh/@item.Alias-@item.Id">@item.Title</a></h2>
+            <h3>@item.Title</h3>
 
 
-            <h3>
+            <p>
                 @item.Description
-            </h3>
+            </p>
 
             <span>Ngày bắt đầu: @item.StartDate - Ngày kết thúc: @item.EndDate</span>
             <br />
@@ -40,10 +47,26 @@
                 if (item_UploadAssignment.ExerciseContentId == item.Id && item_UploadAssignment.Mssv.Equals(ViewBag.GetIdAccount))
                 {
 
+                            <div class="assignment-container" id="trow_@item_UploadAssignment.Id">
+                                <div class="status-btn">
+                                    <i class="fa fa-check" aria-hidden="true"></i> Đã nộp
+                                </div>
+                                <div class="submission-info">
+                                    Ngày nộp: @item_UploadAssignment.UpdateDay ||
+                                    <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a>
+                                   
+                                                                      
+                                </div>
+                              
 
+                                
 
-                    <div><div style="color:red">Đã nộp bài tập</div>Ngày nộp: @item_UploadAssignment.UpdateDay || <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a></div>
+                               
 
+                            </div>
+                            <a style="margin-left: 1000px;color:red" class="deleteExercise" data-id="@item_UploadAssignment.Id" href="#">Thu hồi bài nộp</a>
+@*                             <div><div class="btn " style="color:red">Đã nộp <i class="fa fa-check" aria-hidden="true"></i> </div>Ngày nộp: @item_UploadAssignment.UpdateDay || <a href="~/uploads/UploadAssignment/@item_UploadAssignment.DataName">@item_UploadAssignment.DataName</a></div>
+ *@
                 }
 
             }
@@ -59,7 +82,13 @@
         }
     }
 
+    </div>
+    </div>
+</div>
 
+<br />
+<br />
+<br />
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
     <script>
@@ -73,6 +102,41 @@
                 formData.append("additionalData", "Additional data goes here");
             }
         };
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.deleteExercise', function () {
+                var id = $(this).data('id');
+
+                var conf = confirm("Bạn muốn thu hồi bài nộp chứ");
+
+                if (conf == true) {
+
+                    $.ajax({
+
+                        url: '/CourseStudents/deleteExercise',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+
+                                $('trow_' + id).remove();
+                                alert(rs.msg);
+                                location.reload();
+
+                            }
+                            else {
+                                alert(rs.msg);
+                            }
+                        }
+
+                    });
+
+                }
+            });
+        });
     </script>
 
 

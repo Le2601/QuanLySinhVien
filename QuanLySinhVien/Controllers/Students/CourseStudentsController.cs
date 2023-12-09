@@ -196,7 +196,43 @@ namespace QuanLySinhVien.Controllers.Students
 
 
 
+        [HttpPost]
 
+        public IActionResult deleteExercise(int id)
+        {
+
+            var item = _context.UploadAssignments.Where(x=>x.Id == id).FirstOrDefault();
+
+            if (item != null)
+            {
+                _context.UploadAssignments.Remove(item);
+                //lay ra duoc danh sach duyet trong danh sach va xoa tung doi tuong ben trong danh sach do
+                //luu du lieu vao wwwroot
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+
+                // Tạo folder "newFolder" trong thư mục "uploads"
+                string newFolderPath = Path.Combine(uploadsFolder, "UploadAssignment");
+
+                //cap nhat xong xoa file cu
+                // Xác định đường dẫn tới tệp tin cần xóa trong thư mục wwwroot
+                string filePath_Delete = Path.Combine(newFolderPath, item.DataName);
+
+                // Kiểm tra xem tệp tin có tồn tại hay không
+                if (System.IO.File.Exists(filePath_Delete))
+                {
+                    // Xóa tệp tin
+                    System.IO.File.Delete(filePath_Delete);
+                }
+                _context.SaveChanges();
+                return Json(new { success = true, msg = "Thu hồi thành công" });
+
+            }
+
+           
+            return Json(new { success = false, msg = "Thu hồi thất bại" });
+
+
+        }
 
 
 
