@@ -108,8 +108,28 @@ namespace QuanLySinhVien.Controllers.Students
 
         }
 
+        [Route("/chi-tiet-khoa-hoc/{Alias}-{Id}", Name = "chi-tiet-khoa-hoc")]
+        public async Task<IActionResult> Detail_Course(int id)
+        {
+
+            ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
+            ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
+            ViewBag.Account = new SelectList(_context.Account.ToList(), "Id", "FullName") ;
+
+            var item = await _context.Courses.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            //diem so luong sinh vien trong khoa hoc
+
+            var CountStudent = await _context.CourseMembers.Where(x => x.CourseId == id).CountAsync();
+
+            ViewBag.CountStudent = CountStudent;
+
+            return View(item);
+
+        }
 
 
 
-	}
+
+    }
 }

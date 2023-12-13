@@ -1,0 +1,125 @@
+﻿@model QuanLySinhVien.Models.Course
+@{
+    ViewData["Title"] = "Detail_Course";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">@Model.Title</a></li>
+       
+    </ol>
+</nav>
+
+<style>
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-lg-10 {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .course-info {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+        .course-info div {
+            margin-bottom: 10px;
+        }
+
+    .btn-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-back {
+        background-color: #ccc;
+        border: none;
+    }
+
+    .btn-join {
+        background-color: #007bff;
+        border: none;
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-lg-10 mx-auto">
+
+            <div class="course-info">
+                <div>Tên khóa học:  @Model.Title</div>
+                <div>Giảng viên mở khóa học:  @Model.Account.FullName</div>
+                <div>Năm học:  @Model.SemesterCourse.Title || Khoa: @Model.department.Title</div>
+                <div>Thời gian khóa học: @Model.DateStart - @Model.DateEnd</div>
+                <div>Số lượng thành viên trong khóa học: @ViewBag.CountStudent</div>
+            </div>
+
+            <div class="btn-container">
+               <a class="btn btn-back" href="/HomeStudent">Trở về</a>
+             
+                <a data-id="@Model.Id" data-alias="@Model.Alias" class="btn btn-join btnAddToCourse " onclick="return confirm('Bạn muốn tham gia khóa học này?')">Tham gia khóa học</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnAddToCourse', function () {
+                var id = $(this).data('id');
+                var alias = $(this).data('alias');
+
+
+
+
+                $.ajax({
+                    url: '/CourseStudents/AddToCourse',
+                    type: 'POST',
+                    data: { alias: alias, id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            alert(rs.msg);
+                            location.reload();
+                        }
+                        else {
+                            alert(rs.msg);
+                            location.reload();
+                        }
+                    }
+
+                });
+
+
+
+
+
+            });
+        });
+    </script>
+
+
+}
+
+
+

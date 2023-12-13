@@ -1,0 +1,108 @@
+﻿@model QuanLySinhVien.Models.Course
+@{
+    ViewData["Title"] = "Detail_Course";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .card-body {
+        background-color: #f0f0f0; /* Set a background color */
+        padding: 20px; /* Add some padding for better spacing */
+        border-radius: 8px; /* Add rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+        .card-body div {
+            margin-bottom: 10px; /* Add spacing between each div */
+        }
+
+            /* Style individual div elements */
+            .card-body div:nth-child(odd) {
+                background-color: #e0e0e0; /* Alternate background color for odd divs */
+            }
+
+            /* Add some padding and border to the inner divs for better readability */
+            .card-body div > div {
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            /* Style the text within the divs */
+            .card-body div div {
+                font-weight: bold;
+            }
+
+            /* Style the time range differently */
+            .card-body div:nth-child(4) {
+                font-style: italic;
+            }
+</style>
+
+
+@section naviheader{
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Khóa học</a>
+        </li>
+    </ul>
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản lý khóa học</h1>
+            </div>
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Khóa học</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Model.Title</h3>
+
+
+            <div class="card-tools">
+                <a href="/admin/Course/Index" class="btn btn-danger">Trở về</a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div>Tên khóa học:  @Model.Title</div>
+            <div>Giảng viên mở khóa học:  @Model.Account.FullName</div>
+            <div>Năm học:  @Model.SemesterCourse.Title || Khoa: @Model.department.Title</div>
+            <div>Thời gian khóa học: @Model.DateStart - @Model.DateEnd</div>
+            <div>Số lượng thành viên trong khóa học: @ViewBag.CountStudent</div>
+        </div>
+      
+        <!-- /.card-body -->
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+@section scripts{
+
+
+}

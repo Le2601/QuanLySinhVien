@@ -219,15 +219,35 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         }
 
 
+        [Route("/chi-tiet/{Alias}-{Id}", Name = "chi-tiet")]
+        public async Task<IActionResult> Detail_Course(int id)
+        {
+
+            ViewBag.department = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
+            ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+            ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
+
+            var item = await _context.Courses.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            //diem so luong sinh vien trong khoa hoc
+
+            var CountStudent = _context.CourseMembers.Where(x=> x.CourseId == id).Count();
+
+            ViewBag.CountStudent = CountStudent;
+
+            return View(item);
+
+        }
 
 
-        
-       
 
-      
 
-        
-            
+
+
+
+
+
+
 
 
     }
