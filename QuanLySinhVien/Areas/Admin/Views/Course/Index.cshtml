@@ -6,6 +6,17 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: blue;
+        }
+</style>
+
 @section naviheader{
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -88,7 +99,7 @@
 
                                 <td>@item.Account.FullName</td>
 
-                                <td><a style="color:black" href="/chi-tiet/@item.Alias-@item.Id">@item.Title</a></td>
+                                <td><a class="hvv"   href="/chi-tiet/@item.Alias-@item.Id">@item.Title</a></td>
 
                                 <td>@item.department.Title</td>
                                  <td>@item.SemesterCourse.Title</td>
@@ -98,8 +109,8 @@
                                 <td>@item.DateStart</td>
                               
                                 <td>
-                                    <a class="btn btn-danger" href="/admin/Course/Update/@item.Id">Edit</a>
-                                    <a class="btn btn-outline-primary btnDelete" data-id="@item.Id" href="#">Delete</a>
+                                    <a class="btn btn-danger" href="/admin/Course/Update/@item.Id">Sửa</a>
+                                    <a class="btn btn-outline-primary btnDelete" data-id="@item.Id" href="#">Xóa</a>
                                 </td>
                             </tr>
                         }

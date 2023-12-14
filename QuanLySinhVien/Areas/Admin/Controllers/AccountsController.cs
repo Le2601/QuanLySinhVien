@@ -140,35 +140,32 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         }
 
         // GET: Admin/Accounts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpPost]
+        public async Task<IActionResult> delete(int id)
         {
-            if (id == null)
+            var Account = await _context.Account.Where(x => x.Id == id).FirstAsync();
+
+            //kiem tra neu khoa da ton tai khoa hoc
+
+            var CheckCourse = _context.Courses.Where(x => x.AccountId == id).ToList();
+           
+
+            if (CheckCourse.Count >= 1 )
             {
-                return NotFound();
+                return Json(new { success = false, msg = "Tồn tại khóa ngoại không thể xóa" });
             }
 
-            var account = await _context.Account
-                .Include(a => a.Role)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (account == null)
+
+
+            if (Account != null)
             {
-                return NotFound();
+                _context.Account.Remove(Account);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
             }
-
-            return View(account);
+            return Json(new { success = false });
         }
-
-        // POST: Admin/Accounts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var account = await _context.Account.FindAsync(id);
-            _context.Account.Remove(account);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+       
         private bool AccountExists(int id)
         {
             return _context.Account.Any(e => e.Id == id);
@@ -304,5 +301,12 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             }
         }
 
+
+        public IActionResult ListStudents()
+        {
+
+            var item = _context.Account.Where(x=> x.RoleId == 5).ToList();
+            return View(item);
+        }
     }
 }
