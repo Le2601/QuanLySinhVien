@@ -38,6 +38,11 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
 
             var items = _context.CourseMembers.Where(x => x.CourseId == IdCourseMember).ToList();
+
+            ViewBag.getTitleCourse =  _context.Courses.Where(x=> x.Id == IdCourseMember).First().Title;
+
+        
+
             return View(items);
         }
 

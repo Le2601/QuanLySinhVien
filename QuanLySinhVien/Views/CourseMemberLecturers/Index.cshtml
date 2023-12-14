@@ -3,7 +3,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
 }
-<h1>Danh sách thành viên khóa học</h1>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item">Danh sách sinh viên trong khóa học </li>
+        <li class="breadcrumb-item"><a href="#">@ViewBag.getTitleCourse</a></li>
+       
+    </ol>
+</nav>
 
 <div class="table-responsive">
     <a style="color:white" asp-controller="CourseMemberLecturers" asp-action="Attendance" asp-route-id="@ViewBag.GetIdCourse"  class="btn btn-success" >Điểm danh</a>

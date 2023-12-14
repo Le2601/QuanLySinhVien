@@ -48,12 +48,12 @@ namespace QuanLySinhVien.Controllers.Students
         [Route("login-student.html", Name = "Login-student")]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-
-            if (model.Password.Length <= 5 )
+            if (model.Email == null)
             {
-                ViewBag.Error = "Mật khẩu phải hơn 6 ký tự";
+                ViewBag.Error = "tài khoản không được bỏ trống";
                 return View(model);
             }
+
             try
             {
               
@@ -136,10 +136,13 @@ namespace QuanLySinhVien.Controllers.Students
             }
             catch
             {
-                return RedirectToAction("Login", "AccountStudents", new { area = "", routeName = "Login-student" });
+                ViewBag.Error = "Mật khẩu phải hơn 6 ký tự";
+                return View(model);
+                //return RedirectToAction("Login", "AccountStudents", new { area = "", routeName = "Login-student" });
             }
-
-            return RedirectToAction("Login", "AccountStudents", new { area = "", routeName = "Login-student" });
+            ViewBag.Error = "Đăng nhập thất bại";
+            return View(model);
+            //return RedirectToAction("Login", "AccountStudents", new { area = "", routeName = "Login-student" });
 
 
 

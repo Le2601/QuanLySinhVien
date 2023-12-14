@@ -64,17 +64,17 @@
         <div class="col-lg-10 mx-auto">
 
             <div class="course-info">
-                <div>Tên khóa học:  @Model.Title</div>
-                <div>Giảng viên mở khóa học:  @Model.Account.FullName</div>
-                <div>Năm học:  @Model.SemesterCourse.Title || Khoa: @Model.department.Title</div>
-                <div>Thời gian khóa học: @Model.DateStart - @Model.DateEnd</div>
-                <div>Số lượng thành viên trong khóa học: @ViewBag.CountStudent</div>
+                <div><b>Tên khóa học:</b>  @Model.Title</div>
+                <div><b>Giảng viên mở khóa học:</b>  @Model.Account.FullName</div>
+                <div><b>Năm học:</b>  @Model.SemesterCourse.Title || Khoa: @Model.department.Title</div>
+                <div><b>Thời gian khóa học:</b> @Model.DateStart - @Model.DateEnd</div>
+                <div><b>Số lượng thành viên:</b> @ViewBag.CountStudent</div>
             </div>
 
             <div class="btn-container">
-               <a class="btn btn-back" href="/HomeStudent">Trở về</a>
+                <a class="btn btn-outline-danger" style="color:black" href="/HomeStudent">Trở về</a>
              
-                <a data-id="@Model.Id" data-alias="@Model.Alias" class="btn btn-join btnAddToCourse " onclick="return confirm('Bạn muốn tham gia khóa học này?')">Tham gia khóa học</a>
+                <a data-id="@Model.Id" data-alias="@Model.Alias" class="btn btn-outline-info btnAddToCourse " onclick="return confirm('Bạn muốn tham gia khóa học này?')">Tham gia khóa học</a>
             </div>
 
         </div>
