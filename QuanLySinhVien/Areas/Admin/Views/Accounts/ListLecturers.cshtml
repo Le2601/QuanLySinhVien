@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<QuanLySinhVien.Models.Account>
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ListStudents";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 
 @section naviheader{
     <!-- Left navbar links -->
@@ -15,7 +15,7 @@
             <a href="#" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Tài khoản</a>
+            <a href="#" class="nav-link">Tài khoản </a>
         </li>
     </ul>
 }
@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý tài khoản</h1>
+                <h1>Quản lý khóa học</h1>
             </div>
 
             <div class="col-sm-6">
@@ -44,9 +44,9 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            
-            <a href="/admin/Accounts/ListStudents" class="btn btn-outline-primary">Xem tài khoản sinh viên</a>
-            <a href="/admin/Accounts/ListLecturers" class="btn btn-outline-success">Xem tài khoản giảng viên</a>
+            <h3 class="card-title">Danh sách tài khoản   </h3><br />
+            <a href="/admin/Accounts/index" class="btn btn-outline-primary">Danh sách tài khoản</a>
+            <a href="/admin/Accounts/ListStudents" class="btn btn-outline-success">Xem tài khoản sinh viên</a>
 
             <div class="card-tools">
                 <a href="/admin/Accounts/Create" class="btn btn-danger">Thêm mới</a>
@@ -74,7 +74,7 @@
                         </th>
 
 
-                      
+
                         <th>
                             @Html.DisplayNameFor(model => model.Role)
                         </th>
@@ -101,9 +101,7 @@
                                 @Html.DisplayFor(modelItem => item.Password)
                             </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Role.RoleName)
-                            </td>
+
                             <td>
                                 <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
 
@@ -116,7 +114,7 @@
 
 
         </div>
-       
+
         <!-- /.card-body -->
         <!-- /.card-footer-->
     </div>
@@ -147,7 +145,7 @@
                             }
                             else {
                                 alert(rs.msg);
-                                
+
                                 location.reload();
                             }
                         }
@@ -163,3 +161,5 @@
 
 
 }
+
+

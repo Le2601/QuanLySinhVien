@@ -141,25 +141,27 @@
 
                   var conf = confirm("ban co muon xoa k");
 
-                   if(conf == true){
+                if (conf == true) {
 
+                    $.ajax({
 
-                          $.ajax({
+                        url: '/admin/role/delete',
+                        type: 'post',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('trow_' + id).remove();
+                                location.reload();
+                            }
+                            else {
+                                alert(rs.msg);
+                                location.reload();
+                            }
+                        }
 
-                             url: '/admin/role/Delete',
-                             type: 'POST',
-                             data: {id:id},
-                             success: function(rs)
-                             {
-                                 if(rs.success){
-                                     $('#trow_'+id).remove();
-                                 }
-                             }
+                    });
 
-                          })
-
-
-                   }       
+                }
 
             });
 

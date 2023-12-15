@@ -5,7 +5,16 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutLecturers.cshtml";
 }
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
 
+        a:hover {
+            color: blue;
+        }
+</style>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -40,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
              <td>
-                @Html.DisplayFor(modelItem => item.SemesterCourse.Title)
+                <a href="/chi-tiet_kh_@item.Alias-@item.Id">@item.Title</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
@@ -55,9 +64,9 @@
          
            
             <td>
-                 <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                 <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
 
-                 <a class="btn btn-outline-danger btnDelete" data-id="@item.Id" href="#">Delete</a>
+                 <a class="btn btn-outline-danger btnDelete" data-id="@item.Id" href="#">Xóa</a>
             </td>
                 </tr>
             }  

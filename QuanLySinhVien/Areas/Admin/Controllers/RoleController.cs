@@ -9,6 +9,7 @@ using QuanLySinhVien.Models;
 using System.Threading.Tasks;
 using QuanLySinhVien.DI.Roles;
 using QuanLySinhVien.DI.Departments;
+using Microsoft.EntityFrameworkCore;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -18,9 +19,10 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly IRoleRepository _RolesRepository;
-
-        public RoleController(IRoleRepository roleRepository)
+        private readonly ElearingDbContext _context;
+        public RoleController(ElearingDbContext context, IRoleRepository roleRepository)
         {
+            _context = context;
             _RolesRepository = roleRepository;
         }
 
@@ -51,6 +53,47 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
 
         }
-       
+
+        //public IActionResult Edit(int id)
+        //{
+
+        //    var item = _context.Roles.Where(x=> x.Id == id).FirstOrDefault();
+
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(item);
+        //}
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var item = await _context.Roles.Where(x=> x.Id == id).FirstOrDefaultAsync();
+
+            //kiem tra neu khoa da ton tai khoa hoc
+
+            var CheckAccount = _context.Account.Where(x => x.RoleId == id).ToList();
+           
+
+            if (CheckAccount.Count >= 1 )
+            {
+                return Json(new { success = false, msg = "Tồn tại khóa ngoại không thể xóa" });
+            }
+
+
+
+            if (item != null)
+            {
+               _context.Roles.Remove(item);
+                _context.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+
+
+        }
+
     }
 }

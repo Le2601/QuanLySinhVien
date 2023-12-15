@@ -301,11 +301,18 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             }
         }
 
-
+        //[ResponseCache(Duration = 60)] // Caching trong 60 giây
         public IActionResult ListStudents()
         {
 
             var item = _context.Account.Where(x=> x.RoleId == 5).ToList();
+            return View(item);
+        }
+        //[ResponseCache(Duration = 60)] // Caching trong 60 giây
+        public IActionResult ListLecturers()
+        {
+            var item = _context.Account.Where(x => x.RoleId == 4).ToList();
+
             return View(item);
         }
     }

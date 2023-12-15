@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -176,6 +177,23 @@ namespace QuanLySinhVien.Controllers.Lecturers
 
 
 
+        }
+        [Route("/chi-tiet_kh_{Alias}-{Id}", Name = "detail_gv")]
+        public async Task<IActionResult> details_course(int id)
+        {
+            ViewBag.department = new SelectList(_context.Department.ToList(), "Id", "Title");
+            ViewBag.semester = new SelectList(_context.SemesterCourse.ToList(), "Id", "Title");
+            ViewBag.Account = new SelectList(_context.Account.ToList(), "Id", "FullName");
+
+            var item = await _context.Courses.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            //diem so luong sinh vien trong khoa hoc
+
+            var CountStudent = await _context.CourseMembers.Where(x => x.CourseId == id).CountAsync();
+
+            ViewBag.CountStudent = CountStudent;
+
+            return View(item);
         }
 
 
