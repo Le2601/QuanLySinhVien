@@ -8,6 +8,7 @@ using QuanLySinhVien.Models;
 //using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using QuanLySinhVien.DI.Departments;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -39,9 +40,17 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         public async Task<IActionResult> Create(department model)
         
         {
-
+            var ListCourse = _context.Department.Where(x => x.Title == model.Title).ToList();
             if (ModelState.IsValid)
             {
+
+                if (ListCourse.Count > 0)
+                {
+                    ModelState.AddModelError("Title", "Tên đã tồn tại.");
+                   
+                    return View(model);
+                }
+
                 model.Alias = QuanLySinhVien.Helpper.Utilities.SEOUrl(model.Title);
                 var CreateDepartment = await _departmentsRepository.CreateDepartment(model);
 

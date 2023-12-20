@@ -67,8 +67,19 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Account model)
         {
+
+            var ListCourse = _context.Account.Where(x => x.Email == model.Email).ToList();
             if (ModelState.IsValid)
             {
+
+                if (ListCourse.Count > 0)
+                {
+                    ViewBag.RoleId = new SelectList(_context.Roles.ToList(), "Id", "RoleName");
+                    ModelState.AddModelError("Email", "Email đã tồn tại.");
+                   
+                    return View(model);
+                }
+
                 string salt = Utilities.GetRandomKey();
 
                 model.Password = (model.Password.Trim()).ToMD5();

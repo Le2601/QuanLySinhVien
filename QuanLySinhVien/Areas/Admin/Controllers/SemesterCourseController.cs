@@ -12,6 +12,7 @@ using QuanLySinhVien.DI.Roles;
 using QuanLySinhVien.DI.SemesterCourses;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -45,9 +46,16 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SemesterCourse model)
         {
+            var ListCourse = _context.SemesterCourse.Where(x => x.Title == model.Title).ToList();
+
             if (ModelState.IsValid)
             {
-
+                if (ListCourse.Count > 0)
+                {
+                    ModelState.AddModelError("Title", "Tên đã tồn tại.");
+                   
+                    return View(model);
+                }
                 model.Alias = QuanLySinhVien.Helpper.Utilities.SEOUrl(model.Title);
 
                 var create = await _semesterCoursesRepository.Create(model);

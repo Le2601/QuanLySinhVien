@@ -85,13 +85,42 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
             ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
 
             ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
-            if (model.DepartmentId == 0)
-            {
-                ModelState.AddModelError("DepartmentId", "Vui lòng chọn khoa học");
-                return View(model);
-            }
+
+
+            var ListCourse = _context.Courses.Where(x => x.Title == model.Title).ToList();
+
+                if (model.DepartmentId == 0)
+                {
+
+               
+                    ModelState.AddModelError("DepartmentId", "Không thể để trống");
+                    return View(model);
+                }
+                if (model.SemesterCourseId == 0)
+                {
+
+
+                    ModelState.AddModelError("SemesterCourseId", "Không thể để trống");
+                    return View(model);
+                }
+               
+
+
             if (ModelState.IsValid)
             {
+                
+
+                //kiem tra ten da ton tai
+                if (ListCourse.Count > 0)
+                {
+                    ModelState.AddModelError("Title", "Tên đã tồn tại.");
+                    ViewBag.department = new SelectList(_CourseRepository.GetDepartments(), "Id", "Title");
+                    ViewBag.semester = new SelectList(_CourseRepository.GetSemesterCourses(), "Id", "Title");
+
+                    ViewBag.Account = new SelectList(_CourseRepository.GetAllCreator(), "Id", "FullName");
+                    return View(model);
+                }
+
                 model.AccountId = model.AccountId;
 
                 var GetNameGv = _context.Account.Where(x => x.Id == model.AccountId).FirstOrDefault();
@@ -106,24 +135,7 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
 
                 model.Alias = Helpper.Utilities.SEOUrl(EditTitle);
 
-                //model.Alias = Helpper.Utilities.SEOUrl(model.Title);
-
-                //lay session vao trang admin
-
-                //string loginAdmin = HttpContext.Session.GetString("AccountId");
-
-                //ViewData["AccountId"] = loginAdmin;       
-
-                //int IdCreate = Int32.Parse(loginAdmin); //ep kieu string sang int
-
-                //model.AccountId = IdCreate; //luu bien vua ep vao thuoc tinh creator
-
-
-
-                ////hien thong bao loi cac selectlist neu null
-                //ModelState.AddModelError("DepartmentId", "Vui lòng chọn khoa học");
-                //ModelState.AddModelError("SemesterCourseId", "Vui lòng chọn năm học");
-                //ModelState.AddModelError("AccountId", "Giảng viên phu trách không thể để trống");
+            
 
 
 

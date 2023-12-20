@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using QuanLySinhVien.DI.Roles;
 using QuanLySinhVien.DI.Departments;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLySinhVien.Areas.Admin.Controllers
 {
@@ -41,8 +42,17 @@ namespace QuanLySinhVien.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Role model)
 
         {
-           if (ModelState.IsValid)
+
+            var ListCourse = _context.Roles.Where(x => x.RoleName == model.RoleName).ToList();
+            if (ModelState.IsValid)
             {
+                if (ListCourse.Count > 0)
+                {
+                    ModelState.AddModelError("RoleName", "Tên đã tồn tại.");
+                    
+                    return View(model);
+                }
+
                 var CreateRole = await _RolesRepository.CreateRole(model);
 
 

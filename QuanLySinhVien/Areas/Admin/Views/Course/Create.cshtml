@@ -54,7 +54,7 @@
                                         <label for="exampleInputEmail1">Khoa </label>
                                         @*<input type="text" name="title" class="form-control" placeholder="Nhập">*@
                                         @Html.DropDownListFor(x => x.DepartmentId,  ViewBag.department as SelectList, "Chọn khoa học", new { @class = "form-control", @placeholder = "tên " })
-                                        @Html.ValidationMessageFor(x => x.DepartmentId, "Không thể trống", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(x => x.DepartmentId, "", new { @class = "text-danger" })
                                         
                                        
                                     </div>
@@ -63,14 +63,14 @@
                                         <label for="exampleInputEmail1">Học kỳ </label>
                                         @*<input type="text" name="title" class="form-control" placeholder="Nhập">*@
                                         @Html.DropDownListFor(x => x.SemesterCourseId,  ViewBag.semester as SelectList, "Chọn khoa học", new { @class = "form-control", @placeholder = "tên " })
-                                        @Html.ValidationMessageFor(x => x.SemesterCourseId, "Không thể trống", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(x => x.SemesterCourseId, "", new { @class = "text-danger" })
                                     </div>
 
 
                                     <div class="col-md-10">
                                         <label class="control-label">Giảng viên phụ trách</label>
                                         <select asp-for="AccountId" class="form-control" asp-items="ViewBag.Account"></select>
-                                        @Html.ValidationMessageFor(x => x.AccountId, "Không thể trống", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(x => x.AccountId, "", new { @class = "text-danger" })
                                     </div>
 
                                     <div class="col-md-10">
