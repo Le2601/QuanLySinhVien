@@ -24,6 +24,8 @@ namespace QuanLySinhVien.Controllers.Students
         private readonly ElearingDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
+        //IWebHostEnvironment, đại diện cho môi trường chạy của ứng dụng web.
+        //Giao diện này cung cấp thông tin về các biến môi trường, đường dẫn thư mục
         public UploadAssignmentController(ElearingDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
@@ -88,7 +90,7 @@ namespace QuanLySinhVien.Controllers.Students
                 //end luu du lieu vao wwwroot2
 
 
-                //lay session vao trang admin
+                
 
                 string loginStudent = HttpContext.Session.GetString("AccountId_Student");
 
@@ -101,7 +103,7 @@ namespace QuanLySinhVien.Controllers.Students
                 var add_or_update = _context.UploadAssignments.Where(x => x.Mssv.Equals(get_Account.Code) && x.ExerciseContentId == id).FirstOrDefault();
 
               
-
+                //cap nhat
                 if (add_or_update != null)
                 {
                     //cap nhat xong xoa file cu
@@ -134,6 +136,7 @@ namespace QuanLySinhVien.Controllers.Students
 
                 else
                 {
+                    //biến newDocument được khai báo và khởi tạo dưới dạng một đối tượng
                     var newDocument = new UploadAssignment
                     {
                         ExerciseContentId = id,
