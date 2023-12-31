@@ -30,7 +30,7 @@
      <thead>
       <tr>
         <th>Xem thành viên</th>
-        <th>Nội dung khóa học</th>
+       @*  <th>Nội dung khóa học</th> *@
         <th>Khóa học</th>
         <th>Học kỳ</th>
         <th>Password</th>
@@ -44,9 +44,9 @@
             foreach (var item in Model) {
         <tr id="trow_@item.Id">
                         <td><a href="/CourseMemberLecturers/@item.Alias-@item.Id" class="btn btn-outline-primary">Show</a></td>
-                        <td><a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-outline-success">Thêm</a></td>
+                      @*   <td><a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-outline-success">Thêm</a></td> *@
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                            <a href="/CourseContentLecturers/@item.Alias-@item.Id" class="btn btn-outline-success">@Html.DisplayFor(modelItem => item.Title)</a>
             </td>
              <td>
                 <a href="/chi-tiet_kh_@item.Alias-@item.Id">@item.SemesterCourse.Title</a>

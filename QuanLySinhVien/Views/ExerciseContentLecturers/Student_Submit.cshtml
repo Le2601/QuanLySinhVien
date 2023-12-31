@@ -42,7 +42,7 @@
                             @Html.DisplayFor(modelItem => item.FullName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DataName)
+                            <a href="~/uploads/UploadAssignment/@item.DataName">@Html.DisplayFor(modelItem => item.DataName)</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.UpdateDay)
